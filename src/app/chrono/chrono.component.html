@@ -1,3 +1,10 @@
-<p>
-  chrono works!
-</p>
+<div>
+    <div class="times">
+        {{minutes | decToStr}}:{{seconds | decToStr}},{{milliseconds | decToStr}}
+    </div>
+
+    <button md-raised-button (click)="toggle()">
+        {{!isStarted ? 'Start' : 'Stop'}}
+    </button>
+
+</div>
