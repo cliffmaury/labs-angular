@@ -4,12 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {MaterialModule} from '@angular/material';
 import { AppComponent } from './app.component';
-import { ChronoComponent } from './chrono/chrono.component';
 
 @NgModule({
     declarations: [
-        AppComponent,
-        ChronoComponent
+        AppComponent
     ],
     imports: [
         MaterialModule,
