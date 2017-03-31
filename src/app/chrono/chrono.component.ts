@@ -25,7 +25,7 @@ export class ChronoComponent implements OnInit {
     /**
      *
      */
-    private timer: number;
+    private timer: any;
 
     constructor() {}
 
@@ -39,9 +39,9 @@ export class ChronoComponent implements OnInit {
     private toggle() {
 
         if (this.isStarted) {
-            this.stop();
+            this.stopTimer();
         } else {
-            this.start();
+            this.startTimer();
         }
 
         this.isStarted = !this.isStarted;
@@ -50,7 +50,7 @@ export class ChronoComponent implements OnInit {
     /**
      *
      */
-    private start() {
+    private startTimer() {
 
         this.milliseconds = 0;
         this.seconds = 0;
@@ -76,7 +76,7 @@ export class ChronoComponent implements OnInit {
     /**
      *
      */
-    private stop() {
+    private stopTimer() {
         clearInterval(this.timer);
     }
 }
