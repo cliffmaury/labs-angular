@@ -1,0 +1,22 @@
+{
+  "name": "labs-angular2-docs",
+  "version": "1.0.0",
+  "description": "Labs sur Angular",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "cd tools && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NodeAndTyped/labs-angular2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NodeAndTyped/labs-angular2/issues"
+  },
+  "homepage": "https://github.com/NodeAndTyped/labs-angular2#readme"
+}
