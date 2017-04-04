@@ -1,16 +1,21 @@
 # Labs Angular
 
-Nous verrons au cours des travaux pratiques les points suivants :
+Voir l'ensemble du cours sur [http://NodeAndTyped.github.io/labs-angular](http://NodeAndTyped.github.io/labs-angular).
 
-* [TP 1 – Mise en place de l’environnement](https://github.com/NodeAndTyped/labs-angular2/blob/master/tp1-installation.md),
-* [TP 2 – Le chronomètre](https://github.com/NodeAndTyped/labs-angular2/blob/master/tp2-composant-pipe.md),
+# Mise à jour du contenu
 
-## Objectifs
+L'ensemble des cours sont écris en markdown et sont situés dans le dossier `docs`.
 
-Le labs a pour objectif de vous présenter les différentes fonctionnalités d'Angular. Au programme :
+## Génération de la documentation
 
-* Mise en place de l'environnement avec `@angular/cli`
-* Création d'un composant chronomètre et d'un Pipe,
-* Utilisation des services Angular pour communiquer avec le backend,
-* Création d'un formulaire de saisie,
-* Mise en place du routage.
+Vous pouvez générer la documentation en lançant la commande suivante :
+
+```bash
+npm run build
+```
+
+## Configuration
+
+La génération du document est basée sur la configuration du fichier `generator.json`.
+
+Vous devez préciser explicitement les fichier .md à convertir en HTML et/ou PDF.
