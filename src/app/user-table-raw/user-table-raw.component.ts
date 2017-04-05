@@ -11,7 +11,7 @@ export class UserTableRawComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  @Input() hideOffline: boolean;
   @Input() user:{id: number, email: string, status: { online, offline }};
 
 }

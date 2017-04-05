@@ -15,5 +15,17 @@ tr.even {
   background-color: lightgrey;
 }
 
+caption {
+  text-decoration: underline;
+}
+
+caption.hide {
+  color:blue;
+}
+
+caption.show {
+  color:red;
+}
+
 
 
