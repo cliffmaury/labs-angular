@@ -4,16 +4,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {MaterialModule} from '@angular/material';
+import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
-import { ChronoComponent } from './chrono/chrono.component';
-import { DecToStrPipe } from './dec-to-str.pipe';
+import { UserService } from './user.service';
+import { UserTableComponent } from './user-table/user-table.component';
+import { UserTableRawComponent } from './user-table-raw/user-table-raw.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        ChronoComponent,
-        DecToStrPipe
+        UserTableComponent,
+        UserTableRawComponent
     ],
     imports: [
         MaterialModule,
@@ -21,7 +22,7 @@ import { DecToStrPipe } from './dec-to-str.pipe';
         FormsModule,
         HttpModule
     ],
-    providers: [],
+    providers: [UserService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

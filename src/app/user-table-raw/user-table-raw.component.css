@@ -1,0 +1,11 @@
+td {
+  border: 1px solid black;
+}
+
+td.online {
+  color: green;
+}
+
+td.offline {
+  color: red;
+}

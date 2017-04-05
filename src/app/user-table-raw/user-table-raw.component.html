@@ -1,0 +1,4 @@
+<td>{{user.id}}</td>
+<td>{{user.email}}</td>
+<td [ngClass]="{online: user.status === 'online', offline: user.status === 'offline'}">{{user.status}}</td>
+

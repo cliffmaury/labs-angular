@@ -1,0 +1,19 @@
+table {
+  border-collapse: collapse;
+}
+
+table, tr, th {
+  border: 1px solid black;
+}
+
+thead {
+  background-color: cornflowerblue;
+  color: white;
+}
+
+tr.even {
+  background-color: lightgrey;
+}
+
+
+

@@ -1,0 +1,13 @@
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr app-user-table-raw [ngClass]="{ odd: odd, even: even }" *ngFor="let  user of users; let odd=odd; let even=even;" [user]="user" >
+    </tr>
+  </tbody>
+</table>
