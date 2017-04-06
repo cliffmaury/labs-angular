@@ -7,7 +7,7 @@
       reset
     </button>
 
-    <button md-raised-button (click)="toggle()">
+    <button [ngClass]="{started: isStarted, stopped: !isStarted}" md-raised-button (click)="toggle()">
         {{!isStarted ? 'start' : 'stop'}}
     </button>
 
