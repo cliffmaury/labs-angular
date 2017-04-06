@@ -7,5 +7,9 @@ td.online {
 }
 
 td.offline {
+  color: darkgrey;
+}
+
+td.busy {
   color: red;
 }

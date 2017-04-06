@@ -1,5 +1,5 @@
-<template [ngIf]="user.status === 'online' || (!hideOffline && user.status === 'offline')">
+<template [ngIf]="user.status === 'busy' || user.status === 'online' || (!hideOffline && user.status === 'offline')">
   <td>{{user.id}}</td>
   <td>{{user.email}}</td>
-  <td [ngClass]="{online: user.status === 'online', offline: user.status === 'offline'}">{{user.status}}</td>
+  <td [ngClass]="{online: user.status === 'online', offline: user.status === 'offline', busy: user.status === 'busy'}">{{user.status}}</td>
 </template>
