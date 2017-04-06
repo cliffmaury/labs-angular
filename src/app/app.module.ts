@@ -8,13 +8,13 @@ import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { UserService } from './user.service';
 import { UserTableComponent } from './user-table/user-table.component';
-import { UserTableRawComponent } from './user-table-raw/user-table-raw.component';
+import { UserTableRowComponent } from './user-table-row/user-table-row.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         UserTableComponent,
-        UserTableRawComponent
+        UserTableRowComponent
     ],
     imports: [
         MaterialModule,
