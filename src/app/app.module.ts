@@ -6,15 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
-import { UserService } from './user.service';
-import { UserTableComponent } from './user-table/user-table.component';
-import { UserTableRawComponent } from './user-table-raw/user-table-raw.component';
+import { ChronoComponent } from './chrono/chrono.component';
+import {DecToStrPipe} from "app/dec-to-str.pipe";
 
 @NgModule({
     declarations: [
         AppComponent,
-        UserTableComponent,
-        UserTableRawComponent
+        ChronoComponent,
+        DecToStrPipe
     ],
     imports: [
         MaterialModule,
@@ -22,7 +21,6 @@ import { UserTableRawComponent } from './user-table-raw/user-table-raw.component
         FormsModule,
         HttpModule
     ],
-    providers: [UserService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

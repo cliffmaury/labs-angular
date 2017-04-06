@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserTableComponent } from './user-table.component';
+import { ChronoComponent } from './chrono.component';
 
-describe('UserTableComponent', () => {
-  let component: UserTableComponent;
-  let fixture: ComponentFixture<UserTableComponent>;
+describe('ChronoComponent', () => {
+  let component: ChronoComponent;
+  let fixture: ComponentFixture<ChronoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserTableComponent ]
+      declarations: [ ChronoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserTableComponent);
+    fixture = TestBed.createComponent(ChronoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
