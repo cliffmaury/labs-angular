@@ -26,4 +26,8 @@ export class UserTableComponent implements OnInit {
     this.captionMsg = !this.hideOffline ? CLICK_TO_HIDE_MESSAGE : CLICK_TO_SHOW_MESSAGE;
   }
 
+  trackByUserId(index, user) {
+    return user.id
+  }
+
 }
