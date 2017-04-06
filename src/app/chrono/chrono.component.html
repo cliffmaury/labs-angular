@@ -3,8 +3,12 @@
         {{minutes | decToStr}}:{{seconds | decToStr}},{{milliseconds | decToStr}}
     </div>
 
+    <button md-raised-button (click)="reset()">
+      reset
+    </button>
+
     <button md-raised-button (click)="toggle()">
-        {{!isStarted ? 'Start' : 'Stop'}}
+        {{!isStarted ? 'start' : 'stop'}}
     </button>
 
 </div>

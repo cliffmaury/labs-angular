@@ -51,11 +51,6 @@ export class ChronoComponent implements OnInit {
      *
      */
     private startTimer() {
-
-        this.milliseconds = 0;
-        this.seconds = 0;
-        this.minutes = 0;
-
         this.timer = setInterval(() => {
 
             this.milliseconds++;
@@ -77,6 +72,12 @@ export class ChronoComponent implements OnInit {
      *
      */
     private stopTimer() {
-        clearInterval(this.timer);
+      clearInterval(this.timer);
+    }
+
+    private reset() {
+      this.milliseconds = 0;
+      this.seconds = 0;
+      this.minutes = 0;
     }
 }
