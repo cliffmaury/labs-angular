@@ -19,3 +19,5 @@ npm run build
 La génération du document est basée sur la configuration du fichier `generator.json`.
 
 Vous devez préciser explicitement les fichier .md à convertir en HTML et/ou PDF.
+
+### Ajouter une branche 
