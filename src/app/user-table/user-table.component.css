@@ -1,31 +1,43 @@
-table {
-  border-collapse: collapse;
+
+/**
+ * Remove most spacing between table cells.
+ */
+:host table {
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
-table, tr, th {
-  border: 1px solid black;
+:host table {
+    width: 100%;
+    display: table;
 }
 
-thead {
-  background-color: cornflowerblue;
-  color: white;
-}
-
-tr.even {
-  background-color: lightgrey;
-}
-
-caption {
-  text-decoration: underline;
-}
-
-caption.hide {
-  color:blue;
-}
-
-caption.show {
-  color:grey;
+:host table.bordered > thead > tr,
+:host table.bordered > tbody > tr {
+    border-bottom: 1px solid #d0d0d0;
 }
 
 
+:host table.highlight > tbody > tr {
+    transition: background-color .25s ease;
+}
 
+:host table.highlight > tbody > tr:hover {
+    background-color: #f2f2f2;
+}
+
+:host thead {
+    border-bottom: 1px solid #d0d0d0;
+}
+
+:host th {
+    padding: 15px 5px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+
+:host table > tbody > tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}

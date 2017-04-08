@@ -1,5 +1,9 @@
 td {
-  border: 1px solid black;
+    padding: 15px 5px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    border-radius: 2px;
 }
 
 td.online {

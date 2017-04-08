@@ -1,16 +1,33 @@
-<table>
-  <caption (click)="showHideOfflineUser()" [ngClass]="{ hide: hideOffline, show: !hideOffline }">{{captionMsg}}</caption>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Email</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr app-user-table-row [ngClass]="{ odd: odd, even: even }"
-        *ngFor="let  user of users; trackBy:trackByUserId; let odd = odd; let even = even"
-        [user]="user" [hideOffline]="hideOffline" >
-    </tr>
-  </tbody>
-</table>
+<md-card>
+
+    <md-card-content>
+
+        <div>
+            <md-checkbox (click)="showHideOfflineUser()">
+                Online only
+            </md-checkbox>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr app-user-table-row
+                    [ngClass]="{ odd: odd, even: even }"
+                    *ngFor="let  user of users; trackBy: trackByUserId; let odd = odd; let even = even"
+                    [user]="user"
+                    [hideOffline]="hideOffline">
+
+                </tr>
+
+            </tbody>
+        </table>
+
+    </md-card-content>
+</md-card>
