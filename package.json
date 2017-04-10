@@ -35,7 +35,8 @@
     "method-override": "^2.3.8",
     "morgan": "^1.8.1",
     "socket.io": "^1.7.3",
-    "ts-express-decorators": "^1.4.6"
+    "ts-express-decorators": "^1.4.6",
+    "ts-json-properties": "^1.1.4"
   },
   "devDependencies": {
     "@types/express": "^4.0.35",

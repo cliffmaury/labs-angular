@@ -1,0 +1,8 @@
+{
+  "propertiesFiles":{
+    "cwd":"./properties",
+    "files":{
+      "users": "users.json"
+    }
+  }
+}

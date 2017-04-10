@@ -2,6 +2,7 @@ import {$log} from "ts-log-debug";
 import {ServerLoader, ServerSettings, GlobalAcceptMimesMiddleware, Inject} from "ts-express-decorators";
 import Path = require("path");
 import SocketService from "./services/SocketService";
+import {Properties} from "ts-json-properties";
 
 const rootDir = Path.resolve(__dirname);
 
@@ -13,6 +14,11 @@ const rootDir = Path.resolve(__dirname);
     acceptMimes: ["application/json"]
 })
 export class Server extends ServerLoader {
+
+    constructor() {
+        super();
+        Properties.initialize(`${rootDir}/../properties.json`);
+    }
 
     /**
      * This method let you configure the middleware required by your application to works.
@@ -39,7 +45,7 @@ export class Server extends ServerLoader {
             }));
 
         this.engine('.html', require('ejs').__express)
-            .set('views', './views')
+            .set('views', `${__dirname}/../views`)
             .set('view engine', 'html');
 
         return null;
