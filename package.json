@@ -59,5 +59,9 @@
     "supertest": "^3.0.0",
     "tslint": "^4.4.2",
     "typescript": "^2.0.2"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
   }
 }
