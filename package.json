@@ -1,48 +1,46 @@
 {
-  "name": "labs-angular2",
-  "version": "0.0.0",
-  "license": "MIT",
+  "name": "labs-angular-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.js",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "build": "npm run tsc:project",
+    "coverage": "npm run test-cov && npm run test-remap",
+    "postinstall": "npm run build",
+    "tslint": "tslint ./*.ts ./src/*.ts",
+    "test": "mocha --reporter spec --check-leaks --bail test/",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "tsc:project": "tsc --project tsconfig.json",
+    "start": "concurrently \"npm run tsc:w\" \"nodemon app.js --ignore *.ts\""
   },
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NodeAndTyped/labs-angular2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NodeAndTyped/labs-angular2/issues"
+  },
+  "homepage": "https://github.com/NodeAndTyped/labs-angular2#readme",
   "dependencies": {
-    "@angular/common": "^4.0.0",
-    "@angular/compiler": "^4.0.0",
-    "@angular/core": "^4.0.0",
-    "@angular/forms": "^4.0.0",
-    "@angular/http": "^4.0.0",
-    "@angular/material": "^2.0.0-beta.2",
-    "@angular/platform-browser": "^4.0.0",
-    "@angular/platform-browser-dynamic": "^4.0.0",
-    "@angular/router": "^4.0.0",
-    "core-js": "^2.4.1",
-    "hammerjs": "^2.0.8",
-    "rxjs": "^5.1.0",
-    "zone.js": "^0.8.4"
+    "body-parser": "^1.17.1",
+    "compression": "^1.6.2",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "install": "^0.8.8",
+    "method-override": "^2.3.8",
+    "morgan": "^1.8.1",
+    "socket.io": "^1.7.3",
+    "ts-express-decorators": "^1.4.6"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.0",
-    "@angular/compiler-cli": "^4.0.0",
-    "@types/jasmine": "2.5.38",
-    "@types/node": "~6.0.60",
-    "codelyzer": "~2.0.0",
-    "jasmine-core": "~2.5.2",
-    "jasmine-spec-reporter": "~3.2.0",
-    "karma": "~1.4.1",
-    "karma-chrome-launcher": "~2.0.0",
-    "karma-cli": "~1.0.1",
-    "karma-jasmine": "~1.1.0",
-    "karma-jasmine-html-reporter": "^0.2.2",
-    "karma-coverage-istanbul-reporter": "^0.2.0",
-    "protractor": "~5.1.0",
-    "ts-node": "~2.0.0",
-    "tslint": "~4.5.0",
-    "typescript": "~2.2.0"
+    "@types/express": "^4.0.35",
+    "@types/socket.io": "^1.4.29",
+    "concurrently": "^3.4.0",
+    "nodemon": "^1.11.0"
   }
 }
