@@ -1,20 +1,35 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "lib": ["es6", "dom"],
-    "types": [
+    "module": "commonjs",
+    "target": "es5",
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "experimentalDecorators":true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "isolatedModules": false,
+    "suppressImplicitAnyIndexErrors": false,
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "rootDir": "src/",
+    "outDir": "lib/",
+    "declaration": true,
+    "declarationDir": "lib/",
+    "noResolve": false,
+    "types":[
       "express",
       "socket.io",
       "reflect-metadata"
-    ],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "experimentalDecorators":true,
-    "emitDecoratorMetadata": true,
-    "sourceMap": true,
-    "declaration": false
+    ]
   },
+
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "test",
+    "dts",
+    "lib",
+    "testing"
   ]
 }

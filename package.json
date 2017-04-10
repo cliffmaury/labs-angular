@@ -5,15 +5,18 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.js",
   "scripts": {
-    "build": "npm run tsc:project",
-    "coverage": "npm run test-cov && npm run test-remap",
-    "postinstall": "npm run build",
-    "tslint": "tslint ./*.ts ./src/*.ts",
-    "test": "mocha --reporter spec --check-leaks --bail test/",
+    "prepublish": "npm run tsc:compile",
+    "tslint": "tslint ./src/**/*.ts",
+    "release:major": "npm version major && npm publish && git push --follow-tags",
+    "release:minor": "npm version minor && npm publish && git push --follow-tags",
+    "release:patch": "npm version patch && npm publish && git push --follow-tags",
+    "test": "npm run tsc && mocha --reporter spec --check-leaks --bail test/ $NODE_DEBUG_OPTION && npm run tslint",
+    "test:cov": "npm run tsc && istanbul cover -x \"examples/**\" node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/ && npm run test:remap",
+    "test:remap": "./node_modules/.bin/remap-istanbul -i coverage/coverage.json -o coverage/lcov-report -t html",
+    "test:travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/",
     "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "tsc:project": "tsc --project tsconfig.json",
-    "start": "concurrently \"npm run tsc:w\" \"nodemon app.js --ignore *.ts\""
+    "tsc:compile": "tsc --project tsconfig.compile.json",
+    "start": "concurrently \"npm run tsc:w\" \"nodemon src/app.js --ignore *.ts\""
   },
   "repository": {
     "type": "git",

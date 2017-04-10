@@ -63,5 +63,5 @@ src/**/*.js
 src/**/*.js.map
 app.js
 app.js.map
-
+lib/
 .idea
