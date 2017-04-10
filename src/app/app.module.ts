@@ -14,6 +14,7 @@ import {LoginComponent} from "./login/login.component";
 import {SignUpComponent} from "./sign-up/sign-up.component";
 import {routing} from "./router.config";
 import {AuthenticationService} from "./authentication.service";
+import { DialogUserComponent } from './dialog-user/dialog-user.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import {AuthenticationService} from "./authentication.service";
         UserTableRowComponent,
         HomeComponent,
         LoginComponent,
-        SignUpComponent
+        SignUpComponent,
+        DialogUserComponent
     ],
     imports: [
         MaterialModule,
@@ -31,7 +33,11 @@ import {AuthenticationService} from "./authentication.service";
         HttpModule,
         routing
     ],
-    providers: [UserService, AuthenticationService],
-    bootstrap: [AppComponent]
+    providers: [
+        UserService,
+        AuthenticationService
+    ],
+    bootstrap: [AppComponent],
+    entryComponents: [DialogUserComponent]
 })
 export class AppModule { }

@@ -15,7 +15,7 @@ export class UserService {
     {"id": 5, "email": 'joe.doe@gmail.com', "password" : '12345', "firstName" : 'Joe', "lastName" : 'Doe', "status":  Status.offline}
   ];
 
-  get() {
+  get(): User[] {
     return this.users;
   }
 

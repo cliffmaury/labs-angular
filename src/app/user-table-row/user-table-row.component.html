@@ -4,4 +4,9 @@
   <td>{{user.firstName}}</td>
   <td>{{user.lastName}}</td>
   <td [ngClass]="{online: user.status === Status.online, offline: user.status === Status.offline, busy: user.status === Status.busy}">{{Status[user.status]}}</td>
+    <td>
+
+        <button md-mini-fab (click)="onClickUser()"><md-icon>search</md-icon></button>
+
+    </td>
 </ng-template>

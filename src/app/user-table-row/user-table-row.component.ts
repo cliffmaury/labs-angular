@@ -2,17 +2,26 @@ import {Component, Input, OnInit} from '@angular/core';
 import {User, Status} from "../models/user";
 
 @Component({
-  selector: '[app-user-table-row]',
-  templateUrl: './user-table-row.component.html',
-  styleUrls: ['./user-table-row.component.css']
+    selector: '[user-table-row]',
+    templateUrl: './user-table-row.component.html',
+    styleUrls: ['./user-table-row.component.css']
 })
 export class UserTableRowComponent implements OnInit {
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {
-  }
-  @Input() hideOffline: boolean;
-  @Input() user:User;
-  Status: typeof Status = Status;
+    ngOnInit() {
+
+    }
+
+    @Input() hideOffline: boolean;
+    @Input() user: User;
+    Status: Status = Status;
+
+    @Output() clickUser = new EventEmitter<User>();
+
+    onClickUser() {
+        console.log("UserTable, user clicked =>", this.user);
+        this.clickUser.emit(this.user);
+    }
 }
