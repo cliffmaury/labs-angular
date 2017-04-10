@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const ts_express_decorators_1 = require("ts-express-decorators");
 let RestCtrl = class RestCtrl {
     constructor(routeService) {
@@ -21,21 +22,21 @@ let RestCtrl = class RestCtrl {
     }
 };
 __decorate([
-    ts_express_decorators_1.All("/"), 
-    __metadata('design:type', Function), 
-    __metadata('design:paramtypes', []), 
-    __metadata('design:returntype', Object)
+    ts_express_decorators_1.All("/"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Object)
 ], RestCtrl.prototype, "test", null);
 __decorate([
     ts_express_decorators_1.Get("/html"),
-    ts_express_decorators_1.Render("rest"), 
-    __metadata('design:type', Function), 
-    __metadata('design:paramtypes', []), 
-    __metadata('design:returntype', void 0)
+    ts_express_decorators_1.Render("rest"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
 ], RestCtrl.prototype, "render", null);
 RestCtrl = __decorate([
-    ts_express_decorators_1.Controller("/"), 
-    __metadata('design:paramtypes', [ts_express_decorators_1.RouteService])
+    ts_express_decorators_1.Controller("/"),
+    __metadata("design:paramtypes", [ts_express_decorators_1.RouteService])
 ], RestCtrl);
 exports.RestCtrl = RestCtrl;
 //# sourceMappingURL=RestCtrl.js.map

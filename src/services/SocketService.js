@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const ts_express_decorators_1 = require("ts-express-decorators");
 const SocketIO = require("socket.io");
 let SocketService = class SocketService {
@@ -30,9 +31,8 @@ let SocketService = class SocketService {
     }
 };
 SocketService = __decorate([
-    ts_express_decorators_1.Service(), 
-    __metadata('design:paramtypes', [])
+    ts_express_decorators_1.Service(),
+    __metadata("design:paramtypes", [])
 ], SocketService);
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = SocketService;
 //# sourceMappingURL=SocketService.js.map
