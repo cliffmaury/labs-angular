@@ -10,20 +10,24 @@ import {Router} from "@angular/router";
 })
 export class SignUpComponent implements OnInit {
 
-    private model: any = {};
+    private user: User = new User();
     private error: any = {};
 
-    constructor(private router: Router, private userService:UserService) { }
+    constructor(
+        private router: Router,
+        private userService:UserService
+    ) { }
 
     ngOnInit() { }
 
     signup() {
-        let foundUser:User = this.userService.find(this.model.email);
+
+        const foundUser: User = this.userService.find(this.user.email);
         if(foundUser != null) {
             this.error = {"msg":"user already exist"};
         } else {
             this.error = null;
-            this.userService.create({... this.model, "status" : Status.offline });
+            this.userService.create({... this.user, "status" : Status.offline });
             this.router.navigate(['']);
         }
     }

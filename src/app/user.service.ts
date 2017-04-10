@@ -19,11 +19,11 @@ export class UserService {
         return this.users;
     }
 
-    create(user:User) {
+    create(user: User) {
         this.users.push(user);
     }
 
-    find(email:string):User {
+    find(email:string): User {
         console.log("find user by email", email);
         return this.users.find(user => user.email == email);
     }

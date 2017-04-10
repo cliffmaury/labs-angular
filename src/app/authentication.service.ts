@@ -13,7 +13,7 @@ export class AuthenticationService {
         let user: User = this.userService.find(email);
         let authenticated: boolean =  null != user && user.password == password;
 
-        if(authenticated) {
+        if (authenticated) {
             localStorage.setItem('currentUser', JSON.stringify(user));
         }
         return authenticated;
@@ -28,6 +28,7 @@ export class AuthenticationService {
      * @returns {any}
      */
     public getUser() {
+        console.log('getUser =>', localStorage.getItem('currentUser'));
         return JSON.parse(localStorage.getItem('currentUser'));
     }
 }

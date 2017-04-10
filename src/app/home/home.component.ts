@@ -14,28 +14,17 @@ export class HomeComponent implements OnInit {
     currentUser: User;
 
     constructor(
-        private router: Router,
         public dialog: MdDialog,
         public authService: AuthenticationService
     ) {
         this.currentUser = this.authService.getUser();
-        console.log("check logged authenticated user", this.currentUser);
     }
 
     ngOnInit() {
 
     }
 
-    private changeRoute() {
 
-        if(this.currentUser == null) {
-            this.router.navigate(['login']);
-        } else {
-            this.currentUser = null;
-            this.authService.logout();
-            this.router.navigate(['']);
-        }
-    }
 
     private onClickUser(user: User) {
 

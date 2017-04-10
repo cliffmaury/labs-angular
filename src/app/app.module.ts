@@ -12,9 +12,11 @@ import { UserTableRowComponent } from './user-table-row/user-table-row.component
 import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "./login/login.component";
 import {SignUpComponent} from "./sign-up/sign-up.component";
-import {routing} from "./router.config";
+import {ROUTES} from "./app.routes";
 import {AuthenticationService} from "./authentication.service";
 import { DialogUserComponent } from './dialog-user/dialog-user.component';
+import {RouterModule} from "@angular/router";
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
     declarations: [
@@ -24,14 +26,15 @@ import { DialogUserComponent } from './dialog-user/dialog-user.component';
         HomeComponent,
         LoginComponent,
         SignUpComponent,
-        DialogUserComponent
+        DialogUserComponent,
+        NavbarComponent
     ],
     imports: [
         MaterialModule,
         BrowserModule,
         FormsModule,
         HttpModule,
-        routing
+        RouterModule.forRoot(ROUTES)
     ],
     providers: [
         UserService,

@@ -6,10 +6,13 @@ export const Status: {[K in string]: K} = {
 
 export type Status = keyof typeof Status;
 
-export class User {
-    id: number;
+export class UserCredential {
     email: string;
-    password?: string;
+    password: string;
+}
+
+export class User extends UserCredential {
+    id: number;
     firstName: string;
     lastName: string;
     status: Status;
