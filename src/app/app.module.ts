@@ -9,12 +9,14 @@ import { AppComponent } from './app.component';
 import { UserService } from './user.service';
 import { UserTableComponent } from './user-table/user-table.component';
 import { UserTableRowComponent } from './user-table-row/user-table-row.component';
+import { DialogUserComponent } from './dialog-user/dialog-user.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         UserTableComponent,
-        UserTableRowComponent
+        UserTableRowComponent,
+        DialogUserComponent
     ],
     imports: [
         MaterialModule,
@@ -23,6 +25,7 @@ import { UserTableRowComponent } from './user-table-row/user-table-row.component
         HttpModule
     ],
     providers: [UserService],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [DialogUserComponent]
 })
 export class AppModule { }

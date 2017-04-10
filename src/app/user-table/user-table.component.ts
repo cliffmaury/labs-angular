@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { UserService } from "../user.service";
+import { User } from "../../models/User";
 
 @Component({
-    selector: 'app-user-table',
+    selector: 'user-table',
     templateUrl: './user-table.component.html',
     styleUrls: ['./user-table.component.css'],
 })
@@ -12,6 +13,8 @@ export class UserTableComponent implements OnInit {
 
     public users;
     public hideOffline: boolean = false;
+
+    @Output() clickUser = new EventEmitter<User>();
 
     ngOnInit() {
         this.users = this._userService.get();
@@ -23,6 +26,15 @@ export class UserTableComponent implements OnInit {
 
     trackByUserId(index, user) {
         return user.id
+    }
+
+    /**
+     *
+     * @param user
+     */
+    onClickUser(user) {
+        console.log("UserTable, user clicked =>", user);
+        this.clickUser.emit(user);
     }
 
 }

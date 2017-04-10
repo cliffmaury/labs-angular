@@ -18,11 +18,12 @@
             </thead>
             <tbody>
 
-                <tr app-user-table-row
+                <tr user-table-row
                     [ngClass]="{ odd: odd, even: even }"
                     *ngFor="let  user of users; trackBy: trackByUserId; let odd = odd; let even = even"
                     [user]="user"
-                    [hideOffline]="hideOffline">
+                    [hideOffline]="hideOffline"
+                    (clickUser)="onClickUser($event)">
 
                 </tr>
 
