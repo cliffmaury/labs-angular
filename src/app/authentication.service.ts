@@ -5,16 +5,29 @@ import {User} from "./models/user";
 @Injectable()
 export class AuthenticationService {
 
-  constructor(private userService: UserService) { }
+    constructor(private userService: UserService) { }
 
-  authenticate(email: string, password: string):boolean {
-    console.log("authenticate user by email", email, "password", password);
-    let user:User = this.userService.find(email);
-    let authenticated:boolean =  null != user && user.password == password;
-    if(authenticated) {
-      localStorage.setItem('currentUser', JSON.stringify(user));
+    public authenticate(email: string, password: string):boolean {
+        console.log("authenticate user by email", email, "password", password);
+
+        let user: User = this.userService.find(email);
+        let authenticated: boolean =  null != user && user.password == password;
+
+        if(authenticated) {
+            localStorage.setItem('currentUser', JSON.stringify(user));
+        }
+        return authenticated;
     }
-    return authenticated;
-  }
 
+    public logout() {
+        localStorage.removeItem('currentUser');
+    }
+
+    /**
+     *
+     * @returns {any}
+     */
+    public getUser() {
+        return JSON.parse(localStorage.getItem('currentUser'));
+    }
 }

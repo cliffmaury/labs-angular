@@ -1,6 +1,6 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { UserService } from "../user.service";
-import { User } from "../../models/User";
+import { User } from "../models/user";
 
 @Component({
     selector: 'user-table',

@@ -4,28 +4,28 @@ import {UserService} from "../user.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+    selector: 'app-sign-up',
+    templateUrl: './sign-up.component.html',
+    styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private router: Router, private userService:UserService) { }
+    private model: any = {};
+    private error: any = {};
 
-  ngOnInit() {
-  }
-  model: any = {};
-  error: any = {};
+    constructor(private router: Router, private userService:UserService) { }
 
-  signup() {
-    let foundUser:User = this.userService.find(this.model.email);
-    if(foundUser != null) {
-      this.error = {"msg":"user already exist"};
-    } else {
-      this.error = null;
-      this.userService.create({... this.model, "status" : Status.offline });
-      this.router.navigate(['']);
+    ngOnInit() { }
+
+    signup() {
+        let foundUser:User = this.userService.find(this.model.email);
+        if(foundUser != null) {
+            this.error = {"msg":"user already exist"};
+        } else {
+            this.error = null;
+            this.userService.create({... this.model, "status" : Status.offline });
+            this.router.navigate(['']);
+        }
     }
-  }
 
 }

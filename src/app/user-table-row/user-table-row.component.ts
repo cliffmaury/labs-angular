@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {User, Status} from "../models/user";
 
 @Component({
@@ -16,7 +16,7 @@ export class UserTableRowComponent implements OnInit {
 
     @Input() hideOffline: boolean;
     @Input() user: User;
-    Status: Status = Status;
+    Status = Status;
 
     @Output() clickUser = new EventEmitter<User>();
 

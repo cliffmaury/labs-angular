@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MdDialogRef} from "@angular/material";
-import {User} from "../../models/User";
+import {User} from "../models/user";
 
 @Component({
     selector: 'dialog-user',
