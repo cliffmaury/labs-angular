@@ -13,7 +13,7 @@ export class UserTableComponent implements OnInit {
     public users;
     public hideOffline: boolean = false;
 
-    ngOnInit() {
+  ngOnInit() {
         this.users = this._userService.get();
     }
 

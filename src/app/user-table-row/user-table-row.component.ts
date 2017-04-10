@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {User, Status} from "../models/user";
 
 @Component({
   selector: '[app-user-table-row]',
@@ -12,6 +13,6 @@ export class UserTableRowComponent implements OnInit {
   ngOnInit() {
   }
   @Input() hideOffline: boolean;
-  @Input() user:{id: number, email: string, status: { online, offline, busy }};
-
+  @Input() user:User;
+  Status: typeof Status = Status;
 }

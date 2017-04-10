@@ -1,0 +1,18 @@
+<nav>
+  <ul>
+    <li><a routerLink="">Home</a></li>
+    <li><a routerLink="/signup">Sign up</a></li>
+  </ul>
+</nav>
+<form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+  <div>
+    <input type="email" placeholder="Email" name="email" [(ngModel)]="model.email" #email="ngModel" required>
+    <div *ngIf="f.submitted && !email.valid" >Email is required</div>
+  </div>
+  <div>
+    <input type="password" placeholder="Password" name="password" [(ngModel)]="model.password" #password="ngModel" required >
+    <div *ngIf="f.submitted && !password.valid" >Password is required</div>
+  </div>
+  <div *ngIf="!authenticated" >Wrong User or Password</div>
+  <input type="submit" value="Log in">
+</form>

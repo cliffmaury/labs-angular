@@ -1,0 +1,13 @@
+<nav>
+  <ul>
+    <li><a routerLink="">Home</a></li>
+    <li><a (click)="changeRoute()" style="text-decoration: underline">Sign {{ currentUser != null ? 'out' : 'in'}}</a></li>
+  </ul>
+</nav>
+<div>
+  <div *ngIf="currentUser">
+    <h1>Bonjour {{currentUser.firstName}} {{currentUser.lastName}}!</h1>
+    <app-user-table>
+    </app-user-table>
+  </div>
+</div>
