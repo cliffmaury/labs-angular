@@ -11,20 +11,29 @@ import {AuthenticationService} from "../authentication.service";
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-    currentUser: User;
+    private currentUser: User;
+    private subscriptionLogout;
 
     constructor(
         public dialog: MdDialog,
         public authService: AuthenticationService
     ) {
         this.currentUser = this.authService.getUser();
+        this.subscriptionLogout = this.authService.onLogout.subscribe(this.onLogout);
+
     }
 
     ngOnInit() {
 
     }
 
-
+    /**
+     *
+     * @param b
+     */
+    private onLogout = (b: boolean) => {
+        this.currentUser = undefined;
+    };
 
     private onClickUser(user: User) {
 
@@ -33,5 +42,9 @@ export class HomeComponent implements OnInit {
         const dialogRef = this.dialog.open(DialogUserComponent, {
             data: user
         });
+    }
+
+    ngOnDestroy() {
+        this.subscriptionLogout.unsubscribe();
     }
 }

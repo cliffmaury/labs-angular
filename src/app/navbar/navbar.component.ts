@@ -11,9 +11,19 @@ import {AuthenticationService} from "../authentication.service";
 export class NavbarComponent implements OnInit {
 
     private currentUser: User;
-
+    /**
+     *
+     */
     @Input()
     private title: string;
+    /**
+     *
+     */
+    private subscriptionSignin;
+    /**
+     *
+     */
+    private subscriptionLogout;
 
     constructor(
         private router: Router,
@@ -21,21 +31,48 @@ export class NavbarComponent implements OnInit {
     ) {
         this.currentUser = this.authService.getUser();
         console.log("check logged authenticated user", this.currentUser);
+
+        this.subscriptionSignin = this.authService.onSignin.subscribe(this.onSignin);
+        this.subscriptionLogout = this.authService.onLogout.subscribe(this.onLogout);
     }
 
     ngOnInit() {
 
     }
 
+    /**
+     *
+     * @param user
+     */
+    private onSignin = (user: User) => {
+        this.currentUser = user;
+    };
+
+    /**
+     *
+     * @param b
+     */
+    private onLogout = (b: boolean) => {
+        this.currentUser = undefined;
+        this.router.navigate(['/']);
+        console.log("Logout");
+    };
+
+    /**
+     *
+     */
     private changeRoute() {
 
-        if(this.currentUser == null) {
+        if(!this.currentUser) {
             this.router.navigate(['login']);
         } else {
-            this.currentUser = null;
             this.authService.logout();
-            this.router.navigate(['']);
         }
+    }
+
+    ngOnDestroy() {
+        this.subscriptionLogout.unsubscribe();
+        this.subscriptionSignin.unsubscribe();
     }
 
 }

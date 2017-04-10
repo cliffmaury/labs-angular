@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {UserService} from "./user.service";
 import {User} from "./models/user";
 
 @Injectable()
 export class AuthenticationService {
+
+    private _onSignin: EventEmitter<User> = new EventEmitter();
+    private _onLogout: EventEmitter<boolean> = new EventEmitter();
 
     constructor(private userService: UserService) { }
 
@@ -15,12 +18,14 @@ export class AuthenticationService {
 
         if (authenticated) {
             localStorage.setItem('currentUser', JSON.stringify(user));
+            this._onSignin.emit(user);
         }
         return authenticated;
     }
 
     public logout() {
         localStorage.removeItem('currentUser');
+        this._onLogout.emit(false);
     }
 
     /**
@@ -30,5 +35,13 @@ export class AuthenticationService {
     public getUser() {
         console.log('getUser =>', localStorage.getItem('currentUser'));
         return JSON.parse(localStorage.getItem('currentUser'));
+    }
+
+    get onSignin(): EventEmitter<User> {
+        return this._onSignin;
+    }
+
+    get onLogout(): EventEmitter<boolean> {
+        return this._onLogout;
     }
 }
