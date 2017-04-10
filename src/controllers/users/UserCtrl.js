@@ -41,19 +41,19 @@ let UserCtrl = class UserCtrl {
     }
 };
 __decorate([
-    ts_express_decorators_1.Get('/:email'),
+    ts_express_decorators_1.Get("/:email"),
     __param(0, ts_express_decorators_1.PathParams("email")), 
     __metadata('design:type', Function), 
     __metadata('design:paramtypes', [String]), 
-    __metadata('design:returntype', void 0)
+    __metadata('design:returntype', Object)
 ], UserCtrl.prototype, "getByEmail", null);
 __decorate([
-    ts_express_decorators_1.Patch('/:email/:status'),
+    ts_express_decorators_1.Patch("/:email/:status"),
     __param(0, ts_express_decorators_1.PathParams("email")),
     __param(1, ts_express_decorators_1.PathParams("status")), 
     __metadata('design:type', Function), 
     __metadata('design:paramtypes', [String, String]), 
-    __metadata('design:returntype', void 0)
+    __metadata('design:returntype', Object)
 ], UserCtrl.prototype, "updateStatus", null);
 __decorate([
     ts_express_decorators_1.Put("/:id"),
@@ -61,14 +61,14 @@ __decorate([
     __param(1, ts_express_decorators_1.BodyParams("user")), 
     __metadata('design:type', Function), 
     __metadata('design:paramtypes', [String, Object]), 
-    __metadata('design:returntype', void 0)
+    __metadata('design:returntype', Object)
 ], UserCtrl.prototype, "update", null);
 __decorate([
     ts_express_decorators_1.Post("/"),
     __param(0, ts_express_decorators_1.BodyParams("user")), 
     __metadata('design:type', Function), 
     __metadata('design:paramtypes', [Object]), 
-    __metadata('design:returntype', void 0)
+    __metadata('design:returntype', Object)
 ], UserCtrl.prototype, "create", null);
 __decorate([
     ts_express_decorators_1.Delete("/:id"), 
@@ -77,10 +77,10 @@ __decorate([
     __metadata('design:returntype', void 0)
 ], UserCtrl.prototype, "remove", null);
 __decorate([
-    ts_express_decorators_1.Get('/'), 
+    ts_express_decorators_1.Get("/"), 
     __metadata('design:type', Function), 
     __metadata('design:paramtypes', []), 
-    __metadata('design:returntype', void 0)
+    __metadata('design:returntype', Array)
 ], UserCtrl.prototype, "getList", null);
 UserCtrl = __decorate([
     ts_express_decorators_1.Controller("/users"), 

@@ -17,7 +17,7 @@ let SocketService = class SocketService {
     }
     /**
      * Store all callbacks that will be adding to socket.io instance when
-     *  it'll be created. See SocketService.createServer().
+     *  it"ll be created. See SocketService.createServer().
      */
     onConnection(callback) {
         this.stacks.push(callback);
@@ -26,7 +26,7 @@ let SocketService = class SocketService {
     createServer(httpServer) {
         this.io = SocketIO(httpServer);
         // Map all callbacks to this connection events.
-        this.stacks.forEach(cb => this.io.on('connection', cb));
+        this.stacks.forEach(cb => this.io.on("connection", cb));
     }
 };
 SocketService = __decorate([

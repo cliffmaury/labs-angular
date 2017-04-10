@@ -2,6 +2,7 @@ import {
     Controller, Get, PathParams, Put, BodyParams, Post, Patch, Delete
 } from "ts-express-decorators";
 import {UsersService} from "../../services/UsersService";
+import {IUser} from "../../models/User";
 
 @Controller("/users")
 export class UserCtrl {
@@ -10,18 +11,18 @@ export class UserCtrl {
 
     }
 
-    @Get('/:email')
+    @Get("/:email")
     public getByEmail(
       @PathParams("email") email: string
-    ) {
+    ): IUser {
         return this.usersService.findByEmail(email);
     }
 
-    @Patch('/:email/:status')
+    @Patch("/:email/:status")
     public updateStatus(
         @PathParams("email") email: string,
         @PathParams("status") status: string
-    ) {
+    ): IUser {
 
         const user = this.usersService.findByEmail(email);
         user.status = status;
@@ -33,7 +34,7 @@ export class UserCtrl {
     public update(
         @PathParams("id") id: string,
         @BodyParams("user") user: any
-    ) {
+    ): IUser {
         const oldUser = this.usersService.find(id);
 
         if (!!oldUser) {
@@ -46,7 +47,7 @@ export class UserCtrl {
     @Post("/")
     public create(
         @BodyParams("user") user: any
-    ) {
+    ): IUser {
         return this.usersService.create(user);
     }
 
@@ -55,8 +56,8 @@ export class UserCtrl {
 
     }
 
-    @Get('/')
-    public getList() {
+    @Get("/")
+    public getList(): IUser[] {
         return this.usersService.query();
     }
 }

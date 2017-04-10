@@ -21,13 +21,13 @@ let RestCtrl = class RestCtrl {
     }
 };
 __decorate([
-    ts_express_decorators_1.All('/'), 
+    ts_express_decorators_1.All("/"), 
     __metadata('design:type', Function), 
     __metadata('design:paramtypes', []), 
     __metadata('design:returntype', Object)
 ], RestCtrl.prototype, "test", null);
 __decorate([
-    ts_express_decorators_1.Get('/html'),
+    ts_express_decorators_1.Get("/html"),
     ts_express_decorators_1.Render("rest"), 
     __metadata('design:type', Function), 
     __metadata('design:paramtypes', []), 

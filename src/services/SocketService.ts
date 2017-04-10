@@ -12,7 +12,7 @@ export default class SocketService {
     }
     /**
      * Store all callbacks that will be adding to socket.io instance when
-     *  it'll be created. See SocketService.createServer().
+     *  it"ll be created. See SocketService.createServer().
      */
     public onConnection(callback: Function): SocketService {
         this.stacks.push(callback);
@@ -25,6 +25,6 @@ export default class SocketService {
         this.io = SocketIO(httpServer);
 
         // Map all callbacks to this connection events.
-        this.stacks.forEach(cb => this.io.on('connection', cb));
+        this.stacks.forEach(cb => this.io.on("connection", cb));
     }
 }

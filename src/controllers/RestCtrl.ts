@@ -10,12 +10,12 @@ export class RestCtrl {
 
     }
 
-    @All('/')
+    @All("/")
     public test(): Object {
         return this.routeService.getAll();
     }
 
-    @Get('/html')
+    @Get("/html")
     @Render("rest")
     public render() {
         return {endpoints: JSON.parse(JSON.stringify(this.routeService.getAll()))};

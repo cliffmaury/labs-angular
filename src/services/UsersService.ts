@@ -31,8 +31,8 @@ export class UsersService {
      * @param name
      * @returns {{id: any, name: string}}
      */
-    public create(user: IUser){
-        user._id = require('node-uuid').v4();
+    public create(user: IUser) {
+        user._id = require("node-uuid").v4();
 
         this.users.push(user);
 
