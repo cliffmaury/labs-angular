@@ -5,7 +5,10 @@
     "types": [
       "express",
       "socket.io",
-      "reflect-metadata"
+      "reflect-metadata",
+      "mocha",
+      "chai",
+      "supertest"
     ],
     "module": "commonjs",
     "moduleResolution": "node",
