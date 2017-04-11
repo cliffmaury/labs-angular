@@ -12,7 +12,7 @@ export class UserCredential {
 }
 
 export class User extends UserCredential {
-    id: number;
+    _id: string;
     firstName: string;
     lastName: string;
     status: Status;

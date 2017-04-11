@@ -17,7 +17,7 @@ export class UserTableComponent implements OnInit {
     @Output() clickUser = new EventEmitter<User>();
 
     ngOnInit() {
-        this.users = this._userService.get();
+        this._userService.get().then(data => this.users = data);
     }
 
     showHideOfflineUser() {
