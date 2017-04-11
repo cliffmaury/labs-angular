@@ -11,14 +11,14 @@
 
                 <input mdInput
                        type="text"
-                       placeholder="First Name"
+                       placeholder="Prénom"
                        name="firstName"
                        [(ngModel)]="user.firstName"
                        #firstName="ngModel"
                        required/>
 
                 <md-error *ngIf="firstName.hasError('required')" >
-                    First Name" is required
+                    Veulilez saisir un prénom.
                 </md-error>
 
             </md-input-container>
@@ -32,14 +32,14 @@
 
                 <input mdInput
                        type="text"
-                       placeholder="Last Name"
+                       placeholder="Nom"
                        name="lastName"
                        [(ngModel)]="user.lastName"
                        #lastName="ngModel"
                        required />
 
                 <md-error *ngIf="lastName.hasError('required')" >
-                    Last Name is required
+                    Veuillez saisir le prénom.
                 </md-error>
 
             </md-input-container>

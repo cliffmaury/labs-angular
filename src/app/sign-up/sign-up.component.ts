@@ -26,21 +26,22 @@ export class SignUpComponent implements OnInit {
     signup() {
 
         this.userService
-            .find(this.user.email)
-            .then(user => {
+            .exists(this.user.email)
+            .then(exists => {
 
-                if (user) {
+
+                if (!exists) {
                     return this.userService
                         .create(this.user)
-                        .then(user => {
-                            this.router.navigate(['']);
-                        });
+                        .then(user => this.router.navigate(['/login']));
                 }
 
-                this.error = "L'utilisateur existe déjà !"
+                this.error = "L'utilisateur existe déjà !";
 
+                console.log(this.error);
 
             })
+
             .catch(err => {
                 err = err._body;
             });
