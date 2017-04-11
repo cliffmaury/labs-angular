@@ -1,14 +1,29 @@
 import {
-    Controller, Get, PathParams, Put, BodyParams, Post, Patch, Delete
+    Controller, Get, PathParams, Put, BodyParams, Post, Patch, Delete, Response
 } from "ts-express-decorators";
+import * as Express from "express";
 import {UsersService} from "../../services/UsersService";
-import {IUser} from "../../models/User";
+import {IUser, PartialUser} from "../../models/User";
 
 @Controller("/users")
 export class UserCtrl {
 
     constructor(private usersService: UsersService) {
 
+    }
+
+    @Post("/authenticate")
+    public authenticate(@BodyParams("email") email: string, @BodyParams("password") password: string, @Response() response: Express.Response) {
+        console.log("authenticate user with email", email, " & password ", password);
+        let user:IUser = this.usersService.findByEmail(email);
+        console.log("find user by email", user);
+        if(null == user) {
+            response.send(404, {error:["authentication failed", "user not found"]});
+        }
+        if(user.password !== password) {
+            response.send(401, {error:["authentication failed", "wrong password"]});
+        }
+        response.send(200, user);
     }
 
     @Get("/:email")
@@ -23,10 +38,10 @@ export class UserCtrl {
         @PathParams("email") email: string,
         @PathParams("status") status: string
     ): IUser {
-
+        console.log("patch from email", email, "with status", status);
         const user = this.usersService.findByEmail(email);
         user.status = status;
-
+        console.log("patch user" ,user);
         return this.usersService.patch(user);
     }
 
@@ -48,6 +63,7 @@ export class UserCtrl {
     public create(
         @BodyParams("user") user: any
     ): IUser {
+            console.log("rest create user", user)
         return this.usersService.create(user);
     }
 
@@ -57,7 +73,7 @@ export class UserCtrl {
     }
 
     @Get("/")
-    public getList(): IUser[] {
-        return this.usersService.query();
+    public getList(): PartialUser[] {
+        return this.usersService.queryPartial();
     }
 }
