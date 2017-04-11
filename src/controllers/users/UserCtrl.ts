@@ -1,10 +1,10 @@
 import {
-    Controller, Get, PathParams, Put, BodyParams, Post, Patch, Delete, Response, Required
+    Controller, Get, PathParams, Put, BodyParams, Post, Patch, Delete, Response, Required, Status
 } from "ts-express-decorators";
 import {$log} from "ts-log-debug";
 import {UsersService} from "../../services/UsersService";
 import {IUser, PartialUser} from "../../models/User";
-import {NotFound, Unauthorized} from "ts-httpexceptions";
+import {NotFound, Unauthorized, BadRequest} from "ts-httpexceptions";
 
 
 @Controller("/users")
@@ -14,6 +14,12 @@ export class UserCtrl {
 
     }
 
+    /**
+     * Authenticate a user.
+     * @param email
+     * @param password
+     * @returns {IUser}
+     */
     @Post("/authenticate")
     public authenticate(
         @Required() @BodyParams("email") email: string,
@@ -34,14 +40,30 @@ export class UserCtrl {
             throw new Unauthorized("authentication failed, wrong password");
         }
 
+        user.status = "online";
+
+        this.usersService.patch(user);
+
         return user;
     }
 
-    @Get("/:email")
-    public getByEmail(
-      @PathParams("email") email: string
+    /**
+     * Find a user by is mail or id.
+     * @param idOrMail
+     * @returns {IUser}
+     */
+    @Get("/:id")
+    public get(
+      @PathParams("id") idOrMail: string
     ): IUser {
-        return this.usersService.findByEmail(email);
+
+        const user = this.usersService.findByEmail(idOrMail) || this.usersService.find(idOrMail)
+
+        if (!user) {
+            throw new NotFound("User not found.");
+        }
+
+        return user;
     }
 
     @Patch("/:email/:status")
@@ -49,10 +71,14 @@ export class UserCtrl {
         @PathParams("email") email: string,
         @PathParams("status") status: string
     ): IUser {
+
         $log.debug("patch from email", email, "with status", status);
+
         const user = this.usersService.findByEmail(email);
         user.status = status;
+
         $log.debug("patch user" ,user);
+
         return this.usersService.patch(user);
     }
 
@@ -71,10 +97,25 @@ export class UserCtrl {
     }
 
     @Post("/")
+    @Status(201)
     public create(
-        @BodyParams("user") user: any
+        @Required() @BodyParams("user") user: IUser
     ): IUser {
-            $log.debug("rest create user", user)
+
+        $log.debug("rest create user", user);
+
+        if (!user.email || !user.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+           throw new BadRequest("Email are required");
+        }
+
+        if (!user.password) {
+            throw new BadRequest("Password are required");
+        }
+
+        if (this.usersService.findByEmail(user.email)) {
+            throw new BadRequest("User already created with this email.")
+        }
+
         return this.usersService.create(user);
     }
 
@@ -84,7 +125,7 @@ export class UserCtrl {
     }
 
     @Get("/")
-    public getList(): PartialUser[] {
-        return this.usersService.queryPartial();
+    public getList(): IUser[] {
+        return this.usersService.query();
     }
 }

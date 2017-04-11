@@ -5,9 +5,14 @@ import {$log} from "ts-log-debug";
 
 @Service()
 export class UsersService {
-    @Value("users.list")
-    users: any[];
 
+    @Value("users.list")
+    private USERS: any[];
+    private users;
+
+    constructor() {
+        this.users = this.USERS.map(u => Object.assign({}, u));
+    }
     /**
      * Find a user by his ID.
      * @param id
@@ -51,23 +56,6 @@ export class UsersService {
      */
     public query(): IUser[] {
         return this.users;
-    }
-
-    public queryPartial(): PartialUser[] {
-
-        let partialUsers: PartialUser[] = [];
-
-        this.users.forEach( user => {
-            partialUsers.push({
-                _id: user._id,
-                email: user.email,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                "status": "offline"
-            });
-        });
-
-        return partialUsers;
     }
 
     /**
