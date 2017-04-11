@@ -20,6 +20,7 @@ import { AuthenticationService } from "./authentication.service";
 import { DialogUserComponent } from './dialog-user/dialog-user.component';
 import { RouterModule } from "@angular/router";
 import { NavbarComponent } from './navbar/navbar.component';
+import { UsersSocketService } from "./users-socket.service";
 
 @NgModule({
     declarations: [
@@ -42,7 +43,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     ],
     providers: [
         UserService,
-        AuthenticationService
+        AuthenticationService,
+        UsersSocketService
     ],
     bootstrap: [AppComponent],
     entryComponents: [DialogUserComponent]
