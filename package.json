@@ -1,6 +1,6 @@
 {
   "name": "labs-angular-backend",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.js",
@@ -60,5 +60,9 @@
     "supertest": "^3.0.0",
     "tslint": "^4.4.2",
     "typescript": "^2.0.2"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
   }
 }
