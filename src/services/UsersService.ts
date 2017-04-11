@@ -13,6 +13,24 @@ export class UsersService {
     constructor() {
         this.users = this.USERS.map(u => Object.assign({}, u));
     }
+
+    /**
+     *
+     * @param email
+     * @returns {boolean}
+     */
+    checkEmail(email: string): boolean {
+        return !!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+    }
+
+    /**
+     *
+     * @param status
+     * @returns {boolean}
+     */
+    checkStatus(status: string): boolean {
+        return ["offline", "busy", "online"].indexOf(status) !== -1;
+    }
     /**
      * Find a user by his ID.
      * @param id
@@ -60,31 +78,22 @@ export class UsersService {
 
     /**
      *
+     * @param id
      * @param user
      * @returns {IUser}
      */
-    public update(user: IUser): IUser {
-
-        const users = this.query();
-        const index = this.users.findIndex(o => user._id === o._id);
-
-        users[index] = user;
-
-        return user;
-    }
-
-    /**
-     *
-     * @param user
-     * @returns {IUser}
-     */
-    public patch(user: IUser): IUser {
+    public update(id: string, user: IUser | PartialUser): IUser {
         const users = this.query();
         $log.debug("users size", users.length);
-        const index = this.users.findIndex(o => user._id === o._id);
+        const index = this.users.findIndex(o => id === o._id);
         $log.debug("users index", index);
 
         users[index] = Object.assign(users[index], user);
+
         return users[index];
+    }
+
+    public remove(id: string) {
+
     }
 }

@@ -127,6 +127,7 @@ describe('Rest :', () => {
                     let obj = JSON.parse(response.text);
 
                     expect(obj).to.be.an('array');
+                    expect(obj[0].password).to.be.undefined;
                     done();
 
                 });
@@ -137,7 +138,7 @@ describe('Rest :', () => {
 
     describe("GET /api/users/:id", () => {
 
-        it("should respond 200 (by id)",  inject([ExpressApplication, Done], (expressApplication: ExpressApplication, done: Done) => {
+        it("should respond 200 (by id)", inject([ExpressApplication, Done], (expressApplication: ExpressApplication, done: Done) => {
 
             SuperTest(expressApplication)
                 .get("/api/users/58ebddf642dc90b2031faa36")
@@ -162,7 +163,7 @@ describe('Rest :', () => {
 
         }));
 
-        it("should respond 200 (by mail)",  inject([ExpressApplication, Done], (expressApplication: ExpressApplication, done: Done) => {
+        it("should respond 200 (by mail)", inject([ExpressApplication, Done], (expressApplication: ExpressApplication, done: Done) => {
 
             SuperTest(expressApplication)
                 .get("/api/users/johnniebenson@cytrex.com")
@@ -191,7 +192,7 @@ describe('Rest :', () => {
 
             let id;
 
-            it("should respond 201",  inject([ExpressApplication, Done], (expressApplication: ExpressApplication, done: Done) => {
+            it("should respond 201", inject([ExpressApplication, Done], (expressApplication: ExpressApplication, done: Done) => {
 
                 SuperTest(expressApplication)
                     .post("/api/users")
@@ -225,7 +226,7 @@ describe('Rest :', () => {
                     });
             }));
 
-            it("should get the previous created user",  inject([ExpressApplication, Done], (expressApplication: ExpressApplication, done: Done) => {
+            it("should get the previous created user", inject([ExpressApplication, Done], (expressApplication: ExpressApplication, done: Done) => {
 
                 SuperTest(expressApplication)
                     .get("/api/users/" + id)
@@ -250,7 +251,7 @@ describe('Rest :', () => {
 
             }));
 
-            it("should respond 400 (user exists)",  inject([ExpressApplication, Done], (expressApplication: ExpressApplication, done: Done) => {
+            it("should respond 400 (user exists)", inject([ExpressApplication, Done], (expressApplication: ExpressApplication, done: Done) => {
 
                 SuperTest(expressApplication)
                     .post("/api/users")
@@ -268,7 +269,66 @@ describe('Rest :', () => {
 
         });
 
-    });
+        describe("PATH /api/users/:email/:status", () => {
 
+
+            it("should respond 200", inject([ExpressApplication, Done], (expressApplication: ExpressApplication, done: Done) => {
+
+                SuperTest(expressApplication)
+                    .patch("/api/users/test@test.fr/offline")
+                    .expect(200)
+                    .end((err, response) => {
+
+                        if (err) {
+                            throw(err);
+                        }
+
+                        let obj = JSON.parse(response.text);
+
+                        expect(obj).to.be.an('object');
+                        expect(obj.firstName).to.be.equals('Johnie');
+                        expect(obj.email).to.be.equals('test@test.fr');
+                        expect(obj.password).to.be.equals('12345');
+                        expect(obj.status).to.be.equals('offline');
+
+                        done();
+
+                    });
+
+            }));
+
+        });
+
+        describe("PUT /api/users/:id", () => {
+
+            it("should respond 200", inject([ExpressApplication, Done], (expressApplication: ExpressApplication, done: Done) => {
+
+                SuperTest(expressApplication)
+                    .put("/api/users/58ebddf642dc90b2031faa36")
+                    .send({
+                        user: {
+                            firstName:"test"
+                        }
+                    })
+                    .expect(200)
+                    .end((err, response) => {
+
+                        if (err) {
+                            throw(err);
+                        }
+
+                        let obj = JSON.parse(response.text);
+
+                        expect(obj).to.be.an('object');
+                        expect(obj.firstName).to.be.equals('test');
+
+                        done();
+
+                    });
+
+            }));
+
+        });
+    });
 
 });

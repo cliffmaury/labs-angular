@@ -28,11 +28,11 @@ export class UserCtrl {
 
         $log.debug("authenticate user with email", email, " & password ", password);
 
-        let user: IUser = this.usersService.findByEmail(email);
+        const user: IUser = this.usersService.findByEmail(email);
 
         $log.debug("find user by email", user);
 
-        if(null == user) {
+        if(!user) {
             throw new NotFound("authentication failed, user not found");
         }
 
@@ -40,11 +40,7 @@ export class UserCtrl {
             throw new Unauthorized("authentication failed, wrong password");
         }
 
-        user.status = "online";
-
-        this.usersService.patch(user);
-
-        return user;
+        return this.usersService.update(user._id, {status: "online"});
     }
 
     /**
@@ -68,34 +64,54 @@ export class UserCtrl {
 
     @Patch("/:email/:status")
     public updateStatus(
-        @PathParams("email") email: string,
-        @PathParams("status") status: string
+        @Required() @PathParams("email") email: string,
+        @Required() @PathParams("status") status: string
     ): IUser {
+
+        if (!this.usersService.checkStatus(status)) {
+            throw new BadRequest("Wrong status");
+        }
+
+        if (!this.usersService.checkEmail(email)) {
+            throw new BadRequest("Wrong email");
+        }
+
+        const user = this.usersService.findByEmail(email);
+
+        if (!user) {
+            throw new NotFound("User not found.")
+        }
 
         $log.debug("patch from email", email, "with status", status);
 
-        const user = this.usersService.findByEmail(email);
-        user.status = status;
-
-        $log.debug("patch user" ,user);
-
-        return this.usersService.patch(user);
+        return this.usersService.update(user._id, {status});
     }
 
+    /**
+     *
+     * @param id
+     * @param user
+     * @returns {IUser}
+     */
     @Put("/:id")
     public update(
         @PathParams("id") id: string,
-        @BodyParams("user") user: any
+        @Required() @BodyParams("user") user: any
     ): IUser {
         const oldUser = this.usersService.find(id);
 
-        if (!!oldUser) {
-
+        if (!oldUser) {
+            throw new NotFound("User not found.")
         }
 
-        return this.usersService.update(Object.assign(oldUser, user));
+        return this.usersService.update(oldUser._id, user);
     }
 
+    /**
+     *
+     * @param user
+     * @returns {IUser}
+     */
     @Post("/")
     @Status(201)
     public create(
@@ -104,7 +120,7 @@ export class UserCtrl {
 
         $log.debug("rest create user", user);
 
-        if (!user.email || !user.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+        if (!user.email || !this.usersService.checkEmail(user.email)) {
            throw new BadRequest("Email are required");
         }
 
@@ -119,13 +135,37 @@ export class UserCtrl {
         return this.usersService.create(user);
     }
 
+    /**
+     * Remove the user.
+     * @param id
+     * @returns {any}
+     */
     @Delete("/:id")
-    public remove() {
+    public remove(
+        @PathParams("id") id: string
+    ) {
+        const oldUser = this.usersService.find(id);
 
+        if (!oldUser) {
+            throw new NotFound("User not found.")
+        }
+
+        return this.usersService.remove(id);
     }
 
+    /**
+     * Get All users.
+     * @returns {IUser[]}
+     */
     @Get("/")
     public getList(): IUser[] {
-        return this.usersService.query();
+
+        return this.usersService.query().map(o => {
+
+            o = Object.assign({}, o);
+            delete o.password;
+
+            return o;
+        });
     }
 }
