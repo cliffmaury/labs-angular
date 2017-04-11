@@ -52,7 +52,7 @@
                        placeholder="E-mail"
                        type="email"
                        name="email"
-                       [(ngModel)]="credential.email"
+                       [(ngModel)]="user.email"
                        #email="ngModel"
                        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                        required />
@@ -75,7 +75,7 @@
                        placeholder="Mot de passe"
                        type="password"
                        name="password"
-                       [(ngModel)]="credential.password"
+                       [(ngModel)]="user.password"
                        #password="ngModel"
                        required />
 
