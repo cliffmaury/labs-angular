@@ -1,7 +1,7 @@
 import {$log} from "ts-log-debug";
 import {ServerLoader, ServerSettings, GlobalAcceptMimesMiddleware, Inject} from "ts-express-decorators";
 import Path = require("path");
-import SocketService from "./services/SocketService";
+import {SocketService} from "./services/SocketService";
 import {Properties} from "ts-json-properties";
 
 const rootDir = Path.resolve(__dirname);

@@ -2,6 +2,7 @@ import {Value} from "ts-json-properties";
 import {Service} from "ts-express-decorators";
 import {IUser, PartialUser} from "../models/User";
 import {$log} from "ts-log-debug";
+import {SocketService} from "./SocketService";
 
 @Service()
 export class UsersService {
@@ -10,7 +11,9 @@ export class UsersService {
     private USERS: any[];
     private users;
 
-    constructor() {
+    constructor(
+        private socketService: SocketService
+    ) {
         this.users = this.USERS.map(u => Object.assign({}, u));
     }
 
@@ -54,10 +57,11 @@ export class UsersService {
         const users: IUser[] = this.query();
         return users.find((value: IUser) => value.email === email && value.password === password);
     }
+
     /**
      * Create a new User
-     * @param name
      * @returns {{id: any, name: string}}
+     * @param user
      */
     public create(user: IUser) {
         user._id = require("node-uuid").v4();
@@ -65,6 +69,9 @@ export class UsersService {
         $log.debug("users size before insert", this.users.length);
         this.users.push(user);
         $log.debug("users size", this.users.length);
+
+        this.socketService.emit("users.update", this.query());
+
         return user;
     }
 
@@ -90,11 +97,15 @@ export class UsersService {
 
         users[index] = Object.assign(users[index], user);
 
+        this.socketService.emit("users.update", this.query());
+
         return users[index];
     }
 
     public remove(id: string) {
         const index = this.users.findIndex(o => id === o._id);
         this.users.splice(index, 1);
+
+        this.socketService.emit("users.update", this.query());
     }
 }

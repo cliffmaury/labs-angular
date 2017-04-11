@@ -3,7 +3,7 @@ import {Service} from "ts-express-decorators";
 import * as SocketIO from "socket.io";
 
 @Service()
-export default class SocketService {
+export class SocketService {
     private io: SocketIO.Server;
     private stacks = [];
 
