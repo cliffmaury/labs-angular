@@ -1,7 +1,7 @@
 import {Injectable, EventEmitter} from '@angular/core';
 import {UserService} from "./user.service";
 import {User} from "./models/user";
-import {Http} from "@angular/http";
+import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs";
 
 @Injectable()
@@ -17,26 +17,27 @@ export class AuthenticationService {
     public authenticate(email: string, password: string):Observable<Response> {
         console.log("authenticate user by email", email, "password", password);
 
-      return this.http.post('/api/users/authenticate', { email: email, password: password })
-        .map(response => {
-            if(response.status == 200) {
-              let user = response.json();
-              localStorage.setItem('currentUser', JSON.stringify(user));
+        return this.http.post('/api/users/authenticate', { email: email, password: password })
+            .map(response => {
+                if(response.status == 200) {
+                    let user = response.json();
+                    localStorage.setItem('currentUser', JSON.stringify(user));
 
-            } else if(response.status == 401 || response.status == 404) {
-              console.error("could not authenticate user");
-            }
-            return response.json();
-        }).map( user => {
-          this.http.patch(`/api/users/${email}/online`, {}).subscribe(response => {
-            console.log("update status", response);
-            let user = response.json();
-            this._onSignin.emit(user);
-            localStorage.setItem('currentUser', JSON.stringify(user));
-          });
+                } else if(response.status == 401 || response.status == 404) {
+                    console.error("could not authenticate user");
+                }
+                return response.json();
+            })
+            .map( user => {
+                this.http.patch(`/api/users/${email}/online`, {}).subscribe(response => {
+                    console.log("update status", response);
+                    let user = response.json();
+                    this._onSignin.emit(user);
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                });
 
-          return user;
-        });
+                return user;
+            });
     }
 
     public logout() {
@@ -53,7 +54,7 @@ export class AuthenticationService {
         let user = localStorage.getItem('currentUser');
         console.log("getUser", user)
         if(user) {
-          return JSON.parse(user);
+            return JSON.parse(user);
         }
         return null;
     }
