@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MdDialogRef} from "@angular/material";
-import {User} from "../../models/User";
+import {User} from "../models/user";
 
 @Component({
     selector: 'dialog-user',
@@ -9,12 +9,12 @@ import {User} from "../../models/User";
 })
 export class DialogUserComponent implements OnInit {
 
-    private user: User;
+    public user: User;
 
     constructor(
         public dialogRef: MdDialogRef<DialogUserComponent>
     ) {
-        this.user = dialogRef.config.data
+        console.log(dialogRef.componentInstance);
     }
 
     ngOnInit() {

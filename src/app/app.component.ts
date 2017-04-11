@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {User} from "../models/User";
+import {User} from "./models/User";
 import {MdDialog} from "@angular/material";
 import {DialogUserComponent} from "./dialog-user/dialog-user.component";
 
@@ -17,13 +17,9 @@ export class AppComponent {
 
     private onClickUser(user: User) {
 
-        console.log("AppComponent =>", user);
+        const dialogRef = this.dialog.open(DialogUserComponent);
 
-        const dialogRef = this.dialog.open(DialogUserComponent, {
-            data: user
-        });
+        dialogRef.componentInstance.user = user;
 
-
-        // alert(`${user.firstName} ${user.lastName} is ${user.status}`);
     }
 }

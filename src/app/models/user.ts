@@ -1,10 +1,10 @@
-const Status = {
+export const Status: {[K in string]: K} = {
     online: "online",
     offline: "offline",
     busy: "busy"
 };
 
-type Status = keyof typeof Status;
+export type Status = keyof typeof Status;
 
 export class User {
     id: number;
