@@ -22,7 +22,7 @@
 
                 <tr user-table-row
                     [ngClass]="{ odd: odd, even: even }"
-                    *ngFor="let  user of users; trackBy: trackByUserId; let odd = odd; let even = even"
+                    *ngFor="let  user of users | async; trackBy: trackByUserId; let odd = odd; let even = even"
                     [user]="user"
                     [hideOffline]="hideOffline"
                     (clickUser)="onClickUser($event)">

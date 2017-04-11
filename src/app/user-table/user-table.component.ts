@@ -1,7 +1,8 @@
-import {Component, OnInit, Output, EventEmitter} from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { UserService } from "../user.service";
 import { User } from "../models/user";
-import {UsersSocketService} from "../users-socket.service";
+import { UsersSocketService } from "../users-socket.service";
+import { Observable } from "rxjs";
 
 @Component({
     selector: "user-table",
@@ -10,8 +11,7 @@ import {UsersSocketService} from "../users-socket.service";
 })
 export class UserTableComponent implements OnInit {
 
-    private connection;
-    private users;
+    private users: Observable<User[]>;
     private hideOffline: boolean = false;
 
     @Output() clickUser = new EventEmitter<User>();
@@ -25,15 +25,22 @@ export class UserTableComponent implements OnInit {
      *
      */
     ngOnInit() {
-        this.userService.get().then(data => this.users = data);
 
-        this.connection = this
-            .usersSocketService
-            .getUsers()
-            .subscribe(users => {
-                console.log("New users list =>", users);
-                this.users = users;
-            });
+        const source1 = this
+            .userService
+            .getUsersObservable();
+
+        const source2 = this.usersSocketService.getUsers();
+
+        this.users = Observable.merge(
+            source1,
+            source2
+        );
+
+        //
+        // this.usersSubscription = observable.subscribe(users => this.users);
+        //
+        //
     }
 
     /**
@@ -65,7 +72,7 @@ export class UserTableComponent implements OnInit {
      *
      */
     ngOnDestroy() {
-        this.connection.unsubscribe();
+        // if you use subscription in component => this.usersSubscription.unsubscribe();
     }
 
 }

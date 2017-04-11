@@ -12,14 +12,19 @@ export class UserService {
 
     }
 
+    getUsersObservable() {
+        return this.http
+            .get('api/users')
+            .map(response => response.json());
+    }
     /**
      *
      * @returns {any}
      */
     get(): Promise<User[]> {
         // use fallback to promise
-        return this.http
-            .get('api/users')
+        return this
+            .http.get('api/users')
             .toPromise()
             .then(response => response.json());
     }
@@ -54,7 +59,6 @@ export class UserService {
      * @returns {Promise<U>|Promise<R>|Observable<R|T>|promise.Promise<R>|Maybe<T>|any}
      */
     exists(email: string): Promise<boolean> {
-
 
         return this
             .find(email)
