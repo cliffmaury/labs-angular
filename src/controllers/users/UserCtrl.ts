@@ -144,13 +144,15 @@ export class UserCtrl {
     public remove(
         @PathParams("id") id: string
     ) {
-        const oldUser = this.usersService.find(id);
+        const user = this.usersService.find(id);
 
-        if (!oldUser) {
+        if (!user) {
             throw new NotFound("User not found.")
         }
 
-        return this.usersService.remove(id);
+        this.usersService.remove(id);
+
+        return user;
     }
 
     /**

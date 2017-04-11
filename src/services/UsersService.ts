@@ -94,6 +94,7 @@ export class UsersService {
     }
 
     public remove(id: string) {
-
+        const index = this.users.findIndex(o => id === o._id);
+        this.users.splice(index, 1);
     }
 }
