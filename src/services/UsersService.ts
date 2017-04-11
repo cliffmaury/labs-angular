@@ -1,6 +1,7 @@
 import {Value} from "ts-json-properties";
 import {Service} from "ts-express-decorators";
-import {IUser,PartialUser} from "../models/User";
+import {IUser, PartialUser} from "../models/User";
+import {$log} from "ts-log-debug";
 
 @Service()
 export class UsersService {
@@ -18,11 +19,11 @@ export class UsersService {
     }
 
     public findByEmail(email: string) {
-        console.log("find by email", email);
+        $log.debug("find by email", email);
         const users: IUser[] = this.query();
-        console.log("users size", users.length);
+        $log.debug("users size", users.length);
         let user = users.find(user => user.email === email);
-        console.log("user found", user);
+        $log.debug("user found", user);
         return user;
     }
 
@@ -37,10 +38,10 @@ export class UsersService {
      */
     public create(user: IUser) {
         user._id = require("node-uuid").v4();
-        console.log("create user", user);
-        console.log("users size before insert", this.users.length);
+        $log.debug("create user", user);
+        $log.debug("users size before insert", this.users.length);
         this.users.push(user);
-        console.log("users size", this.users.length);
+        $log.debug("users size", this.users.length);
         return user;
     }
 
@@ -53,10 +54,18 @@ export class UsersService {
     }
 
     public queryPartial(): PartialUser[] {
-        let partialUsers:PartialUser[]=new Array();
+
+        let partialUsers: PartialUser[] = [];
+
         this.users.forEach( user => {
-            partialUsers.push({_id:user._id, email:user.email, firstName:user.firstName, lastName:user.lastName, "status":'offline'})
-        })
+            partialUsers.push({
+                _id: user._id,
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                "status": "offline"
+            });
+        });
 
         return partialUsers;
     }
@@ -83,9 +92,9 @@ export class UsersService {
      */
     public patch(user: IUser): IUser {
         const users = this.query();
-        console.log("users size", users.length);
+        $log.debug("users size", users.length);
         const index = this.users.findIndex(o => user._id === o._id);
-        console.log("users index", index);
+        $log.debug("users index", index);
 
         users[index] = Object.assign(users[index], user);
         return users[index];

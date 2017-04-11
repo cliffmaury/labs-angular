@@ -1,9 +1,11 @@
 import {
-    Controller, Get, PathParams, Put, BodyParams, Post, Patch, Delete, Response
+    Controller, Get, PathParams, Put, BodyParams, Post, Patch, Delete, Response, Required
 } from "ts-express-decorators";
-import * as Express from "express";
+import {$log} from "ts-log-debug";
 import {UsersService} from "../../services/UsersService";
 import {IUser, PartialUser} from "../../models/User";
+import {NotFound, Unauthorized} from "ts-httpexceptions";
+
 
 @Controller("/users")
 export class UserCtrl {
@@ -13,17 +15,26 @@ export class UserCtrl {
     }
 
     @Post("/authenticate")
-    public authenticate(@BodyParams("email") email: string, @BodyParams("password") password: string, @Response() response: Express.Response) {
-        console.log("authenticate user with email", email, " & password ", password);
-        let user:IUser = this.usersService.findByEmail(email);
-        console.log("find user by email", user);
+    public authenticate(
+        @Required() @BodyParams("email") email: string,
+        @Required() @BodyParams("password") password: string
+    ) {
+
+        $log.debug("authenticate user with email", email, " & password ", password);
+
+        let user: IUser = this.usersService.findByEmail(email);
+
+        $log.debug("find user by email", user);
+
         if(null == user) {
-            response.send(404, {error:["authentication failed", "user not found"]});
+            throw new NotFound("authentication failed, user not found");
         }
+
         if(user.password !== password) {
-            response.send(401, {error:["authentication failed", "wrong password"]});
+            throw new Unauthorized("authentication failed, wrong password");
         }
-        response.send(200, user);
+
+        return user;
     }
 
     @Get("/:email")
@@ -38,10 +49,10 @@ export class UserCtrl {
         @PathParams("email") email: string,
         @PathParams("status") status: string
     ): IUser {
-        console.log("patch from email", email, "with status", status);
+        $log.debug("patch from email", email, "with status", status);
         const user = this.usersService.findByEmail(email);
         user.status = status;
-        console.log("patch user" ,user);
+        $log.debug("patch user" ,user);
         return this.usersService.patch(user);
     }
 
@@ -63,7 +74,7 @@ export class UserCtrl {
     public create(
         @BodyParams("user") user: any
     ): IUser {
-            console.log("rest create user", user)
+            $log.debug("rest create user", user)
         return this.usersService.create(user);
     }
 

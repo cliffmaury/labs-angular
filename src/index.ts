@@ -5,9 +5,11 @@ import SocketService from "./services/SocketService";
 import {Properties} from "ts-json-properties";
 
 const rootDir = Path.resolve(__dirname);
+console.log(process.env.NODE_ENV );
 
 @ServerSettings({
     rootDir,
+    env: process.env.NODE_ENV,
     mount: {
         '/api': `${rootDir}/controllers/**/**.js`
     },
@@ -32,9 +34,11 @@ export class Server extends ServerLoader {
             compress = require('compression'),
             methodOverride = require('method-override');
 
+        if (this.settings.$get().env !== "test") {
+            this.use(morgan('dev'))
+        }
 
         this
-            .use(morgan('dev'))
             .use(GlobalAcceptMimesMiddleware)
             .use(cookieParser())
             .use(compress({}))
