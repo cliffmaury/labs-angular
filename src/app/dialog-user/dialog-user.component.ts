@@ -14,7 +14,7 @@ export class DialogUserComponent implements OnInit {
     constructor(
         public dialogRef: MdDialogRef<DialogUserComponent>
     ) {
-        this.user = dialogRef.config.data
+        this.user = dialogRef.componentInstance.user;
     }
 
     ngOnInit() {
