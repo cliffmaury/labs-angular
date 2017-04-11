@@ -9,21 +9,33 @@ import { User } from "../models/user";
 })
 export class UserTableComponent implements OnInit {
 
-    constructor(private _userService: UserService) { }
-
-    public users;
-    public hideOffline: boolean = false;
+    private users: User[] ;
+    private hideOffline: boolean = false;
 
     @Output() clickUser = new EventEmitter<User>();
 
+
+    constructor(private userService: UserService) { }
+
+    /**
+     *
+     */
     ngOnInit() {
-        this._userService.get().then(data => this.users = data);
+        this.userService.get().then(data => this.users = data);
     }
 
+    /**
+     *
+     */
     showHideOfflineUser() {
         this.hideOffline = !this.hideOffline;
     }
 
+    /**
+     *
+     * @param index
+     * @param user
+     */
     trackByUserId(index, user) {
         return user.id
     }
