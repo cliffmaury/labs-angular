@@ -9,8 +9,9 @@ import {UserCredential, User} from "../models/user";
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    credential: UserCredential = new UserCredential();
-    authenticated: boolean = true;
+
+    private credential: UserCredential = new UserCredential();
+    private error: string;
 
     constructor(
         private router: Router,
@@ -25,15 +26,16 @@ export class LoginComponent implements OnInit {
 
     login(user: User) {
 
+        this.error = "";
 
-        this.authenticated = this
+        const authenticated = this
             .authenticationService
             .authenticate(this.credential.email, this.credential.password);
 
-        console.log("user is authenticated", this.authenticated);
-
-        if (this.authenticated) {
+        if (authenticated) {
             this.router.navigate(['']);
+        } else {
+            this.error = "Mot de passe ou e-mail incorrect."
         }
     }
 

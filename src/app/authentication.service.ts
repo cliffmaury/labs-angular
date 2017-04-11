@@ -10,7 +10,13 @@ export class AuthenticationService {
 
     constructor(private userService: UserService) { }
 
-    public authenticate(email: string, password: string):boolean {
+    /**
+     *
+     * @param email
+     * @param password
+     * @returns {boolean}
+     */
+    public authenticate(email: string, password: string): boolean {
         console.log("authenticate user by email", email, "password", password);
 
         let user: User = this.userService.find(email);
@@ -37,10 +43,18 @@ export class AuthenticationService {
         return JSON.parse(localStorage.getItem('currentUser'));
     }
 
+    /**
+     *
+     * @returns {EventEmitter<User>}
+     */
     get onSignin(): EventEmitter<User> {
         return this._onSignin;
     }
 
+    /**
+     *
+     * @returns {EventEmitter<boolean>}
+     */
     get onLogout(): EventEmitter<boolean> {
         return this._onLogout;
     }

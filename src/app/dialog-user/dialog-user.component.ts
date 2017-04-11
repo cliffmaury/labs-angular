@@ -9,12 +9,12 @@ import {User} from "../models/user";
 })
 export class DialogUserComponent implements OnInit {
 
-    private user: User;
+    public user: User;
 
     constructor(
         public dialogRef: MdDialogRef<DialogUserComponent>
     ) {
-        this.user = dialogRef.componentInstance.user;
+        console.log(dialogRef.componentInstance);
     }
 
     ngOnInit() {

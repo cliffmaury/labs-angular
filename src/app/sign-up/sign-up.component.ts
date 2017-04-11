@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 export class SignUpComponent implements OnInit {
 
     private user: User = new User();
-    private error: any = {};
+    private error: string;
 
     constructor(
         private router: Router,
@@ -20,11 +20,16 @@ export class SignUpComponent implements OnInit {
 
     ngOnInit() { }
 
+    /**
+     *
+     */
     signup() {
+
+        this.error = "";
 
         const foundUser: User = this.userService.find(this.user.email);
         if(foundUser != null) {
-            this.error = {"msg":"user already exist"};
+            this.error = "L'utilisateur existe déjà !";
         } else {
             this.error = null;
             this.userService.create({... this.user, "status" : Status.offline });
