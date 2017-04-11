@@ -17,11 +17,13 @@
                        #firstName="ngModel"
                        required/>
 
+                <md-error *ngIf="firstName.hasError('required')" >
+                    First Name" is required
+                </md-error>
+
             </md-input-container>
 
-            <div *ngIf="firstName.dirty && firstName.hasError('required')" >
-                First Name" is required
-            </div>
+
 
             <br />
 
@@ -36,12 +38,11 @@
                        #lastName="ngModel"
                        required />
 
+                <md-error *ngIf="lastName.hasError('required')" >
+                    Last Name is required
+                </md-error>
+
             </md-input-container>
-
-            <div *ngIf="lastName.dirty && lastName.hasError('required')" >
-                Last Name is required
-            </div>
-
 
             <br />
 
@@ -51,44 +52,45 @@
                        placeholder="E-mail"
                        type="email"
                        name="email"
-                       [(ngModel)]="user.email"
+                       [(ngModel)]="credential.email"
                        #email="ngModel"
                        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                        required />
 
+                <md-error *ngIf="email.hasError('required')">
+                    Veuillez saisir un e-mail.
+                </md-error>
+
+                <md-error *ngIf="email.hasError('pattern')">
+                    Veuillez saisir un e-mail valide.
+                </md-error>
+
             </md-input-container>
-
-            <div *ngIf="email.dirty && email.hasError('required')">
-                Email is required
-            </div>
-
-
-            <div *ngIf="email.dirty && email.hasError('pattern')">
-                Saisissez une e-mail valide
-            </div>
 
             <br />
 
             <md-input-container class="">
+
                 <input mdInput
                        placeholder="Mot de passe"
                        type="password"
                        name="password"
-                       [(ngModel)]="user.password"
+                       [(ngModel)]="credential.password"
                        #password="ngModel"
                        required />
 
+                <md-error *ngIf="password.hasError('required')">
+                    Veuillez saisir un e-mail.
+                </md-error>
 
+                <md-error *ngIf="error">
+                    {{error}}
+                </md-error>
 
             </md-input-container>
 
-            <div *ngIf="password.dirty && password.hasError('required')">
-                Password is required
-            </div>
-
             <br />
-
-            <div *ngIf="error">{{error.msg}}</div>
+            <br />
 
             <button md-raised-button type="submit" [disabled]="signupForm.invalid">M'enregistrer</button>
         </form>

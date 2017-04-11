@@ -6,45 +6,46 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class UserService {
 
-    constructor(private http:Http) {
-        // use observable
-        this.http.get('/api/users').subscribe(
-            response => {
-                this.users = response.json();
-            }
-        );
+    private users: User[];
+
+    constructor(private http: Http) {
+
     }
 
-
-    private users: User[];
-    /*= [
-     {"id": 1, "email": 'john.doe@gmail.com', "password" : '12345', "firstName" : 'John', "lastName" : 'Doe', "status": Status.online},
-     {"id": 2, "email": 'jane.doe@gmail.com', "password" : '12345', "firstName" : 'Jane', "lastName" : 'Doe', "status": Status.offline},
-     {"id": 3, "email": 'jean.dupond@gmail.com', "password" : '12345', "firstName" : 'Jean', "lastName" : 'Dupond', "status": Status.busy},
-     {"id": 4, "email": 'jean.dupont@gmail.com', "password" : '12345', "firstName" : 'Jean', "lastName" : 'Dupont', "status": Status.online},
-     {"id": 5, "email": 'jeanne.dark@gmail.com', "password" : '12345', "firstName" : 'Jeanne', "lastName" : 'Dark', "status": Status.offline},
-     {"id": 5, "email": 'joe.doe@gmail.com', "password" : '12345', "firstName" : 'Joe', "lastName" : 'Doe', "status":  Status.offline}
-     ];
+    /**
+     *
+     * @returns {any}
      */
-
     get(): Promise<User[]> {
         // use fallback to promise
-        return this.http.get('/api/users').toPromise().then(
-            response => response.json()
-        );
+        return this.http
+            .get('api/users')
+            .toPromise()
+            .then(response => response.json());
     }
 
-    create(user: User) {
-        this.http.post('/api/users', {"user":user}).subscribe(
-            response => {
-                this.users = response.json();
-            }
-        );
+    /**
+     *
+     * @param user
+     */
+    create(user: User): Promise<User> {
+        return this.http
+            .post('/api/users', {user})
+            .toPromise()
+            .then(response => response.json());
     }
 
-    find(email:string): User {
+    /**
+     *
+     * @param email
+     * @returns {any}
+     */
+    find(email: string): Promise<User> {
         console.log("find user by email", email);
-        return this.users.find(user => user.email == email);
+        return this.http
+            .get(`/api/users/${email}`)
+            .toPromise()
+            .then(response => response.json());
     }
 
 }

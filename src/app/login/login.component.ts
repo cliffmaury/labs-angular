@@ -5,36 +5,49 @@ import {UserCredential, User} from "../models/user";
 import {Http} from "@angular/http";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
-  private _onConnected: EventEmitter<User> = new EventEmitter();
+    private _onConnected: EventEmitter<User> = new EventEmitter();
 
-  credential: UserCredential = new UserCredential();
-  authenticated: boolean = true;
+    private credential: UserCredential = new UserCredential();
+    private error: string;
 
-  constructor(private router: Router,
-              private authenticationService: AuthenticationService,
-              private http:Http) {
+    constructor(
+        private router: Router,
+        private authenticationService: AuthenticationService,
+        private http:Http
+    ) {
 
-  }
+    }
 
-  ngOnInit() {
+    ngOnInit() {
 
-  }
+    }
 
-  login(user: User) {
-    this.authenticationService.authenticate(this.credential.email, this.credential.password)
-      .subscribe(user => {
-        this.authenticated = user != null;
-        console.log("user is authenticated", this.authenticated);
-        if (this.authenticated) {
-          this.router.navigate(['']);
-        }
-      });
-  }
+    /**
+     *
+     * @param user
+     */
+    login(user: User) {
+
+        this.error = "";
+
+        this.authenticationService
+            .authenticate(this.credential.email, this.credential.password)
+            .then(user => {
+                this.router.navigate(['']);
+            })
+            .catch(err => {
+
+                console.log(err);
+
+                this.error = err._body;
+
+            });
+    }
 
 }

@@ -37,11 +37,10 @@ export class HomeComponent implements OnInit {
 
     private onClickUser(user: User) {
 
-        console.log("AppComponent =>", user);
+        const dialogRef = this.dialog.open<DialogUserComponent>(DialogUserComponent);
 
-        const dialogRef = this.dialog.open(DialogUserComponent, {
-            data: user
-        });
+        dialogRef.componentInstance.user = user;
+
     }
 
     ngOnDestroy() {
