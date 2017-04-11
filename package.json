@@ -15,6 +15,7 @@
     "test:remap": "./node_modules/.bin/remap-istanbul -i coverage/coverage.json -o coverage/lcov-report -t html",
     "test:travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/",
     "tsc": "tsc",
+    "tsc:w": "tsc -w",
     "tsc:compile": "tsc --project tsconfig.compile.json",
     "start": "concurrently \"npm run tsc:w\" \"nodemon src/app.js --ignore *.ts\""
   },
