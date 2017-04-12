@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "npm install && concurrently \"npm run start:server\" \"npm run start:app\"",
     "build": "ng build",
+    "start": "npm install && concurrently \"npm run start:server\" \"npm run start:app\"",
     "start:app": "ng serve --proxy-config proxy.conf.json",
     "start:server": "node server.js",
     "test": "ng test",
