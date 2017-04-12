@@ -8,7 +8,10 @@
     "branchs": [
       "tp1-solution",
       "tp2-solution",
-      "tp3-solution"
+      "tp3-solution",
+      "tp4-solution",
+      "tp5-solution",
+      "tp6-solution"
     ]
   },
 
@@ -17,7 +20,10 @@
       {"title": "Accueil", "cwd":"${root}/src", "path": "index.md"},
       {"title": "TP 1 - Installation", "cwd":"${root}/src", "path": "tp1-installation.md"},
       {"title": "TP 2 - Le composant Chronomètre", "cwd":"${root}/src", "path": "tp2-composant-pipe.md"},
-      {"title": "TP 3 - Créer une liste d'utilisateurs en ligne", "cwd":"${root}/src", "path": "tp3-composants-imbriques-service-directive-angular.md"}
+      {"title": "TP 3 - Créer une liste d'utilisateurs en ligne", "cwd":"${root}/src", "path": "tp3-composants-imbriques-service-directive-angular.md"},
+      {"title": "TP 4 - Formulaires et routes", "cwd":"${root}/src", "path": "tp4-formulaires-routes.md"},
+      {"title": "TP 5 - Intégration des webservices", "cwd":"${root}/src", "path": "tp5-webservice.md"},
+      {"title": "TP 6 - Programmation reactive et websocket", "cwd":"${root}/src", "path": "tp6-programmation-reactive-websocket.md"}
     ]
   },
 
