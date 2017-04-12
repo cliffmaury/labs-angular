@@ -166,10 +166,15 @@ npm install --save @angular/material
 <pre><code class="bash">npm install --save @angular/material
 </code></pre>
 <p>Puis rajouter dans le fichier <code>app.module.ts</code> la dépendence du module comme suivant :</p>
-<pre><code class="typescript">import { MaterialModule } from '@angular/material';
+<pre><code class="typescript">import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from '@angular/material';
 // other imports 
 @NgModule({
-  imports: [MaterialModule],
+  ...  
+  imports: [
+      BrowserAnimationsModule, 
+      MaterialModule
+  ],
   ...
 })
 export class AppModule { }
@@ -177,6 +182,15 @@ export class AppModule { }
 <p>En complément vous pouvez rajouter la feuille de style suivante dans la page index si vous voulez utiliser
 les icônes de la librairie Material :</p>
 <pre><code class="html">&#x3C;link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</code></pre>
+<p>Enfin dans le <code>styles.css</code>, ajouter le thème :</p>
+<pre><code class="css">@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+body {
+    padding: 0;
+    margin:0;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
 </code></pre>
 <h2>Générer des Composants, Directives, Pipe, etc...</h2>
 <p>Vous pouvez utiliser la commande <code>ng generate</code> (ou <code>ng g</code>) pour générer des composants Angular : </p>
@@ -480,7 +494,144 @@ dans une boite de dialogue (soit via une alert ou en utilisant la librairie <a h
 <blockquote>
 <p>Formulaires et routes</p>
 </blockquote>
-<p>Dans ce TP, nous allons créer les formulaires de connexion et d'authentification.</p>
+<p>Dans ce TP, nous allons créer les formulaires de connexion et d'authentification.
+Pour ce faire nous aurons besoin de mettre en place la module de routage d'Angular
+pour afficher plusieurs pages.</p>
+<h2>Installation</h2>
+<p>Installez le module <code>@angular/router</code> avec la commande suivante :</p>
+<pre><code class="bash">npm install -g @angular/router
+</code></pre>
+<h2>Création des pages et des routes</h2>
+<p>Nous devons maintenant créer les composants
+Déclarez ensuite les routes dans un nouveau fichier <code>app.routes.js</code>. Nous devrons créer les routes suivantes :</p>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Route</th>
+<th>Composant</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accueil</td>
+<td>/</td>
+<td>HomeComponent</td>
+<td>Affiche un message de bienvenu avec un bouton rediregeant l'utilisateur vers la page de connexion. Une authentifié, cette page affiche la liste des utilisateurs.</td>
+</tr>
+<tr>
+<td>Login</td>
+<td>/login</td>
+<td>LoginComponent</td>
+<td>Formulaire d'authentification</td>
+</tr>
+<tr>
+<td>Signup</td>
+<td>/signup</td>
+<td>SigninComponent</td>
+<td>Formulaire d'inscription</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Commencez par créer les composants énoncés dans le tableau. </li>
+<li>Ensuite, vous devrez écrire vos routes dans le fichier <code>app.routes.js</code> en fonction de tableau ci-dessus.</li>
+<li>Importez vos routes dans votre application <code>app.module.js</code>comme suivant :</li>
+</ol>
+<pre><code class="typescript">import { ROUTES } from "./app.routes";
+import { RouterModule } from "@angular/router";
+
+@NgModule({
+    ...
+    imports: [
+        RouterModule.forRoot(ROUTES)
+    ],
+    ...
+}
+</code></pre>
+<p>Enfin vous devez indiquer au routeur où seront afficher les vues dans votre application.</p>
+<pre><code class="html">&#x3C;router-outlet>&#x3C;/router-outlet>
+</code></pre>
+<h3>Page d'accueil</h3>
+<p>La page d'accueil devra afficher la liste des utilisateurs une fois authentifié.
+Commencez par réintégrer la liste des utilisateurs dans HomeComponent. Nous nous occuperons des règles d'affichage plus tard.</p>
+<h3>Page d'authentification</h3>
+<p>Nous allons maintenant utiliser les API Formulaires d'Angular. Nous utiliserons ici les <code>formulaires pilotés par le template</code>
+mais vous êtes libre d'utiliser la seconde approche.</p>
+<p>Le formulaire de connexion présentera les éléments suivants :</p>
+<ul>
+<li>Un champ e-mail, qui est un champ obligatoire et doit respecter le pattern e-mail,</li>
+<li>Un champ mot de passe, qui est un champ obligatoire,</li>
+<li>Un bouton de connexion, actif que si toutes les données saisies sont valides,</li>
+<li>Un bouton <code>ou m'enregister</code> pour rediriger l'utilisateur vers la page d'inscription.</li>
+</ul>
+<p>N'oubliez pas d'afficher les messages en fonction du type d'erreur du champs associé.</p>
+<p>Voici un exemple du formulaire attendu en Material :</p>
+<p><img src="images/login.png" alt="max-300"> </p>
+<h3>Le service Authenticate</h3>
+<p>Une fois le formulaire réalisé, vous devrez créer le service <code>AuthenticateService</code> (<code>ng g service authenticate</code>) qui aura pour fonction d'authentifier
+l'utilisateur. </p>
+<p>Ce service exposera les méthodes suivantes :</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Descripton</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>authenticate(email: string, password: string): boolean</code></td>
+<td>Permet d'authentifier l'utilisateur. Stocke l'utilisateur dans le localStorage et émet un événement sur le flux 
+<code>onSignin</code>
+.</td>
+</tr>
+<tr>
+<td><code>logout()</code></td>
+<td>Supprimer les infos stocker dans le localStorage et émet un événement sur le flux onLogout.</td>
+</tr>
+<tr>
+<td><code>getUser()</code></td>
+<td>Retourne l'utilisateur connecté et stocké dans le localStorage.</td>
+</tr>
+<tr>
+<td><code>get onSignin(): EventEmitter&#x3C;User></code></td>
+<td>Retourne l'objet (ou flux) 
+<code>EventEmmiter</code>
+ dédié à l'événement onSignin.</td>
+</tr>
+<tr>
+<td><code>get onLogout(): EventEmitter&#x3C;boolean></code></td>
+<td>Retourne l'objet (ou flux) 
+<code>EventEmmiter</code>
+ dédié à l'événement onLogout.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Nous utiliserons la class EventEmitter pour permettre à des composants de s'abonner à des événements.</p>
+</blockquote>
+<h3>La page d'accueil (fin)</h3>
+<p>Maintenant que vous avez un service AuthenticateService de prêt, vous pouvez gérer les règles d'affichage de cette page !</p>
+<h3>Page d'inscription</h3>
+<p>Le formulaire d'inscription présentera les éléments suivants :</p>
+<ul>
+<li>Prénom, qui est un champ obligatoire, </li>
+<li>Nom, qui est un champ obligatoire, </li>
+<li>Un champ e-mail, qui est un champ obligatoire et doit respecter le pattern e-mail,</li>
+<li>Un champ mot de passe, qui est un champ obligatoire,</li>
+<li>Un bouton de enregistrer, actif que si toutes les données saisies sont valides,</li>
+</ul>
+<p>Ensuite rajouter les fonctions permettant d'ajouter un utilisateur dans liste d'utilisateurs du service <code>UserService</code>.</p>
+<h3>La navbar (bonus)</h3>
+<p>Une application est toujours plus belle lorsque cette dernière possède une <code>navbar</code>.</p>
+<p>Cette navbar devra s'afficher sur l'ensemble des pages. Elle devra afficher les liens suivants :</p>
+<ul>
+<li>Home,</li>
+<li>Signin lorsque aucun utilisateur n'est authentifié,</li>
+<li>Signout lorsqu'un utilisateur est authentifié.</li>
+</ul>
 <blockquote>
 <p>Correction du TP : <a href="../../Resources/tp4-solution.zip">tp4-solution</a></p>
 </blockquote>
@@ -489,9 +640,6 @@ dans une boite de dialogue (soit via une alert ou en utilisant la librairie <a h
 <h1>TP 5</h1>
 <blockquote>
 <p>Intégration des webservices</p>
-</blockquote>
-<p>Dans ce TP, nous allons créer les formulaires de connexion et d'authentification.</p>
-<blockquote>
 <p>Correction du TP : <a href="../../Resources/tp5-solution.zip">tp5-solution</a></p>
 </blockquote>
 

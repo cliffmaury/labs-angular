@@ -42,10 +42,15 @@ npm install --save @angular/material
 Puis rajouter dans le fichier `app.module.ts` la dépendence du module comme suivant :
 
 ```typescript
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
 // other imports 
 @NgModule({
-  imports: [MaterialModule],
+  ...  
+  imports: [
+      BrowserAnimationsModule, 
+      MaterialModule
+  ],
   ...
 })
 export class AppModule { }
@@ -57,6 +62,19 @@ les icônes de la librairie Material :
 ```html
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 ```
+
+Enfin dans le `styles.css`, ajouter le thème :
+
+```css
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+body {
+    padding: 0;
+    margin:0;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+```
+
 
 ## Générer des Composants, Directives, Pipe, etc...
 

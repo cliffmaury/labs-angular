@@ -136,10 +136,15 @@ npm install --save @angular/material
 <pre><code class="bash">npm install --save @angular/material
 </code></pre>
 <p>Puis rajouter dans le fichier <code>app.module.ts</code> la dépendence du module comme suivant :</p>
-<pre><code class="typescript">import { MaterialModule } from '@angular/material';
+<pre><code class="typescript">import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from '@angular/material';
 // other imports 
 @NgModule({
-  imports: [MaterialModule],
+  ...  
+  imports: [
+      BrowserAnimationsModule, 
+      MaterialModule
+  ],
   ...
 })
 export class AppModule { }
@@ -147,6 +152,15 @@ export class AppModule { }
 <p>En complément vous pouvez rajouter la feuille de style suivante dans la page index si vous voulez utiliser
 les icônes de la librairie Material :</p>
 <pre><code class="html">&#x3C;link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</code></pre>
+<p>Enfin dans le <code>styles.css</code>, ajouter le thème :</p>
+<pre><code class="css">@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+body {
+    padding: 0;
+    margin:0;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
 </code></pre>
 <h2>Générer des Composants, Directives, Pipe, etc...</h2>
 <p>Vous pouvez utiliser la commande <code>ng generate</code> (ou <code>ng g</code>) pour générer des composants Angular : </p>
