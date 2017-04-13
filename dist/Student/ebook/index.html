@@ -320,8 +320,11 @@ export class AppModule { }
 <p>Et n'oubliez pas le bouton start/stop du chrono !</p>
 <p>Voici un exemple de ce qui est attendu :</p>
 <p><img src="images/chrono.png" alt="max-300"> </p>
-<p>Vous pouvez utiliser <code>@angular/material</code> pour créer un bouton comme suivant :`</p>
-<pre><code class="html">&#x3C;button md-raised-button>Text&#x3C;/button>
+<p>Vous pouvez utiliser <code>@angular/material</code> pour créer un bouton et votre composant comme suivant :</p>
+<pre><code class="html">&#x3C;div>
+    &#x3C;span class="times">0&#x3C;/span>
+    &#x3C;button md-raised-button>Start&#x3C;/button>
+&#x3C;/div>
 </code></pre>
 <p>Pour le css :</p>
 <pre><code class="css">:host {
@@ -370,7 +373,7 @@ export class AppModule { }
 <h3>Exercice 2 - Création de l'action click</h3>
 <p>À partir du cours, essayez de créer une action au click du bouton.</p>
 <h3>Exercice 3</h3>
-<p>Maintenant que vous avez créer l'action au click du bouton, implémentez les méthodes <code>startTimer()</code> et <code>stopTimer()</code>.</p>
+<p>Maintenant que vous avez créé l'action au click du bouton, implémentez les méthodes <code>startTimer()</code> et <code>stopTimer()</code>.</p>
 <h2>Notre premier Pipe</h2>
 <p>En l'état l'affichage des minutes, secondes et millisecondes n'est pas correct (cf. capture chrono).</p>
 <p>Nous allons donc créer un Pipe, équivalent des filtres Angular 1, pour formatter les données.</p>

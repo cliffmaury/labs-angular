@@ -78,10 +78,13 @@ Voici un exemple de ce qui est attendu :
 
 ![max-300](images/chrono.png) 
 
-Vous pouvez utiliser `@angular/material` pour créer un bouton comme suivant :`
+Vous pouvez utiliser `@angular/material` pour créer un bouton et votre composant comme suivant :
 
 ```html
-<button md-raised-button>Text</button>
+<div>
+    <span class="times">0</span>
+    <button md-raised-button>Start</button>
+</div>
 ```
 
 Pour le css :
@@ -127,7 +130,9 @@ Pour le css :
 
 }
 ```
+
 > Note : le selecteur `:host` représente l'élément encapsulant votre composant Angular.
+
 
 ### Exercice 2 - Création de l'action click
 
@@ -137,7 +142,7 @@ Pour le css :
 
 ### Exercice 3
 
-Maintenant que vous avez créer l'action au click du bouton, implémentez les méthodes `startTimer()` et `stopTimer()`.
+Maintenant que vous avez créé l'action au click du bouton, implémentez les méthodes `startTimer()` et `stopTimer()`.
 
 
 ## Notre premier Pipe
