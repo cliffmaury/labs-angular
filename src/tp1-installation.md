@@ -19,7 +19,6 @@ et lancez les commandes suivantes :
 npm install -g @angular/cli
 ng new tp-angular
 cd tp-angular
-npm install --save @angular/material
 ```
 
 > Une fois le projet créé vous pouvez l'ouvrir dans votre IDE.
@@ -37,6 +36,7 @@ Nous allons utiliser Angular material pour créer les interfaces de nos applicat
 Lancer la commande suivante:
 ```bash
 npm install --save @angular/material
+npm install --save @angular/animations
 ```
 
 Puis rajouter dans le fichier `app.module.ts` la dépendence du module comme suivant :

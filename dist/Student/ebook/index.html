@@ -152,7 +152,6 @@ et lancez les commandes suivantes :</p>
 <pre><code class="bash">npm install -g @angular/cli
 ng new tp-angular
 cd tp-angular
-npm install --save @angular/material
 </code></pre>
 <blockquote>
 <p>Une fois le projet créé vous pouvez l'ouvrir dans votre IDE.</p>
@@ -164,6 +163,7 @@ npm install --save @angular/material
 <p>Nous allons utiliser Angular material pour créer les interfaces de nos applications.</p>
 <p>Lancer la commande suivante:</p>
 <pre><code class="bash">npm install --save @angular/material
+npm install --save @angular/animations
 </code></pre>
 <p>Puis rajouter dans le fichier <code>app.module.ts</code> la dépendence du module comme suivant :</p>
 <pre><code class="typescript">import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -292,7 +292,7 @@ export class ChronoComponent implements OnInit {
         
     }
     
-    onInit() {
+    ngOnInit() {
         
     }
 }
@@ -724,9 +724,6 @@ Vous pouvez directement transformer l'objet Observable retourner par Http en Pro
 <h1>TP 6</h1>
 <blockquote>
 <p>Programmation réactive et websocket</p>
-</blockquote>
-<p>Dans ce TP, nous allons créer les formulaires de connexion et d'authentification.</p>
-<blockquote>
 <p>Correction du TP : <a href="../../Resources/tp6-solution.zip">tp6-solution</a></p>
 </blockquote>
 

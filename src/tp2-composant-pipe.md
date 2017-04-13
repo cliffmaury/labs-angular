@@ -42,7 +42,7 @@ export class ChronoComponent implements OnInit {
         
     }
     
-    onInit() {
+    ngOnInit() {
         
     }
 }
