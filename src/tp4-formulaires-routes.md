@@ -20,7 +20,7 @@ Déclarez ensuite les routes dans un nouveau fichier `app.routes.ts`. Nous devro
 
 Page | Route | Composant | Description
 ---|---|---|---
-Accueil | / | HomeComponent | Affiche un message de bienvenu avec un bouton rediregeant l'utilisateur vers la page de connexion. Une authentifié, cette page affiche la liste des utilisateurs. 
+Accueil | / | HomeComponent | Affiche un message de bienvenue avec un bouton redirigeant l'utilisateur vers la page de connexion. Une fois authentifié, cette page affiche la liste des utilisateurs. 
 Login | /login | LoginComponent | Formulaire d'authentification
 Signup | /signup | SignupComponent |Formulaire d'inscription
 
@@ -41,7 +41,7 @@ import { RouterModule } from "@angular/router";
 }
 ```
 
-Enfin vous devez indiquer au routeur où seront afficher les vues dans votre application.
+Enfin vous devez indiquer au routeur où seront affichées les vues dans votre application.
 
 ```html
 <router-outlet></router-outlet>
