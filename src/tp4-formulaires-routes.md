@@ -10,23 +10,23 @@ pour afficher plusieurs pages.
 Installez le module `@angular/router` avec la commande suivante :
 
 ```bash
-npm install -g @angular/router
+npm install --save @angular/router
 ```
 
 ## Création des pages et des routes
 
 Nous devons maintenant créer les composants 
-Déclarez ensuite les routes dans un nouveau fichier `app.routes.js`. Nous devrons créer les routes suivantes :
+Déclarez ensuite les routes dans un nouveau fichier `app.routes.ts`. Nous devrons créer les routes suivantes :
 
 Page | Route | Composant | Description
 ---|---|---|---
 Accueil | / | HomeComponent | Affiche un message de bienvenu avec un bouton rediregeant l'utilisateur vers la page de connexion. Une authentifié, cette page affiche la liste des utilisateurs. 
 Login | /login | LoginComponent | Formulaire d'authentification
-Signup | /signup | SigninComponent |Formulaire d'inscription
+Signup | /signup | SignupComponent |Formulaire d'inscription
 
 1. Commencez par créer les composants énoncés dans le tableau. 
-2. Ensuite, vous devrez écrire vos routes dans le fichier `app.routes.js` en fonction de tableau ci-dessus.
-3. Importez vos routes dans votre application `app.module.js`comme suivant :
+2. Ensuite, vous devrez écrire vos routes dans le fichier `app.routes.ts` en fonction de tableau ci-dessus.
+3. Importez vos routes dans votre application `app.module.ts`comme suivant :
 
 ```typescript
 import { ROUTES } from "./app.routes";
